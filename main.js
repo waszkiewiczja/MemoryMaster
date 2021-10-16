@@ -1,5 +1,6 @@
 const przyciskStart = document.querySelector(".start");
 const przyciskWynik = document.querySelector(".wynik");
+let poziomTrudnosci = 2;
 
 przyciskStart.addEventListener("click", () => {
   przyciskStart.style.display = "none";
@@ -9,8 +10,9 @@ przyciskStart.addEventListener("click", () => {
 
   let wynik_tury = 0;
   let dlugoscTury = 0;
-  let poziomTrudnosci = 4;
-  const dlugoscGry = 21;
+
+  let dlugoscGry = 5 + poziomTrudnosci;
+  let zezwolenieKliknieciaCzlowieka = false;
 
   // jeżeli jest poziom trudnosci trzy to sprawdzam co było pokazane 3 klikniecia temu  Czyli wyswietlanie idzie caly czas w tempie 1 sek on 1 sek off
 
@@ -22,7 +24,7 @@ przyciskStart.addEventListener("click", () => {
     );
     if (wynik_tury === 0 || wynik_tury === 1) {
       poziomTrudnosci -= 1;
-    } else if (wynik_tury === 4 || wynik_tury === 5) {
+    } else if (wynik_tury === dlugoscGry - 1 || wynik_tury === dlugoscGry) {
       poziomTrudnosci += 1;
     } else {
       poziomTrudnosci = poziomTrudnosci;
@@ -50,8 +52,9 @@ przyciskStart.addEventListener("click", () => {
     let losoweLiczby = [];
     console.log("zaczynam", poziomTrudnosci);
     for (let i = 0; i < dlugoscGry; i++) {
-      losoweLiczby.push(Math.floor(Math.random() * 25));
+      losoweLiczby.push(Math.floor(Math.random() * 16));
     }
+    console.log(losoweLiczby);
     return losoweLiczby;
   };
 
@@ -62,24 +65,25 @@ przyciskStart.addEventListener("click", () => {
     for (let i = 0; i < dlugoscGry; i++) {
       odpowiedzi.push(bazaOdpowiedzi[Math.floor(Math.random() * 9)]);
     }
+    console.log(odpowiedzi);
     return odpowiedzi;
   };
   let wynikiOdpowiedzi = losoweOdpowiedzi();
 
   //Tura Komputera
   const turaKomputera = () => {
+    console.log("Start tury komputera nr", dlugoscTury);
+    zezwolenieKliknieciaCzlowieka = false;
     //Podświetlanie wybranych pól na planszy
     const podwietlaniePol = () => {
       let time = 0;
 
-      console.log(wynikiJednejKolejki);
-
       let interval = setInterval(function () {
-        if (time < dlugoscGry) {
-          pojawianiePola(wszystkie_pola[wynikiJednejKolejki[time]]);
-          wszystkie_pola[wynikiJednejKolejki[time]].innerHTML =
-            wynikiOdpowiedzi[time];
-          znikaniePola(wszystkie_pola[wynikiJednejKolejki[time]]);
+        if (time < 1) {
+          pojawianiePola(wszystkie_pola[wynikiJednejKolejki[dlugoscTury]]);
+          wszystkie_pola[wynikiJednejKolejki[dlugoscTury]].innerHTML =
+            wynikiOdpowiedzi[dlugoscTury];
+          znikaniePola(wszystkie_pola[wynikiJednejKolejki[dlugoscTury]]);
           time++;
         } else {
           clearInterval(interval);
@@ -106,44 +110,63 @@ przyciskStart.addEventListener("click", () => {
 
   turaKomputera();
 
+  let wynikiKliknieciaCzlowieka = [];
+
+  wszystkie_pola.forEach((pole, i) => {
+    pole.addEventListener("click", () => {
+      if (zezwolenieKliknieciaCzlowieka === true) {
+        wynikiKliknieciaCzlowieka.push(i);
+        console.log(wynikiKliknieciaCzlowieka);
+      }
+    });
+  });
+
   // Tura Człowieka
   const turaCzlowieka = () => {
     const klikniecieCzlowieka = () => {
-      console.log("start");
-      let wynikiKliknieciaCzlowieka = [];
-      wszystkie_pola.forEach((pole, i) => {
-        pole.addEventListener("click", () => {
-          wynikiKliknieciaCzlowieka.push(i);
-
-          if (wynikiKliknieciaCzlowieka.length === poziomTrudnosci) {
-            if (_.isEqual(wynikiJednejKolejki, wynikiKliknieciaCzlowieka)) {
-              console.log("sukces");
-              wynik_tury += 1;
-              console.log(wynik_tury);
-            } else {
-              console.log("porazka");
-            }
-          }
-        });
-      });
+      console.log("start tury człowieka");
+      zezwolenieKliknieciaCzlowieka = true;
     };
     klikniecieCzlowieka();
-    const dlugoscOdpowiedzi = `${poziomTrudnosci - 1}500`;
 
-    if (dlugoscTury < 21) {
+    if (dlugoscTury < dlugoscGry - 1) {
       setTimeout(function () {
-        console.log("Nowa tura", dlugoscTury);
-        wynikiJednejKolejki = losowePola();
-        wynikiOdpowiedzi = losoweOdpowiedzi();
+        // jeżeli użytkownik nie kliknie w daje turze, to dodajemy za niego undefined
+        if (wynikiKliknieciaCzlowieka.length < dlugoscTury + 1) {
+          wynikiKliknieciaCzlowieka.push(undefined);
+        }
+        //jeżeli użytkownik kliknie 2 razy w danej turze to zaliczamy tylko pierwsze kliknięcie
+        if (wynikiKliknieciaCzlowieka.length > dlugoscTury + 1) {
+          wynikiKliknieciaCzlowieka = wynikiKliknieciaCzlowieka.slice(
+            0,
+            dlugoscTury + 1
+          );
+        }
         dlugoscTury += 1;
+        console.log("Odpowiedzi człowieka", wynikiKliknieciaCzlowieka);
+        console.log("koniec tury człowieka");
         turaKomputera();
-      }, dlugoscOdpowiedzi);
-    } else if (dlugoscTury === 21) {
+      }, 1000);
+    } else if (dlugoscTury === dlugoscGry - 1) {
       setTimeout(function () {
         console.log("Koniec");
-        przyciskWynik.innerHTML = `Wynik ${wynik_tury}/5`;
+        console.log("Wynik komputera", wynikiJednejKolejki);
+
+        wynikiKliknieciaCzlowieka = wynikiKliknieciaCzlowieka.slice(
+          poziomTrudnosci - 1,
+          wynikiKliknieciaCzlowieka.length
+        );
+        console.log("Wynik człowieka", wynikiKliknieciaCzlowieka);
+        for (let i = 0; i < dlugoscTury + 1; i++) {
+          if (wynikiJednejKolejki[i] === wynikiKliknieciaCzlowieka[i]) {
+            wynik_tury += 1;
+          }
+        }
+        console.log("Wynik tury", wynik_tury);
+
+        przyciskWynik.innerHTML = `Wynik ${wynik_tury}/${dlugoscGry}`;
         zmianaPoziomuTrudnosci();
-      }, dlugoscOdpowiedzi);
+      }, 1000);
     }
   };
 });
