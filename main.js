@@ -1,12 +1,18 @@
 const przyciskStart = document.querySelector(".start");
 const przyciskWynik = document.querySelector(".wynik");
+const przyciskPozycja = document.querySelector(".pozycja");
+const przyciskLitera = document.querySelector(".litera");
+
 let poziomTrudnosci = 2;
 
 przyciskStart.addEventListener("click", () => {
   przyciskStart.style.display = "none";
   przyciskWynik.style.display = "none";
+  przyciskPozycja.style.display = "block";
+  przyciskLitera.style.display = "block";
+
   const wszystkie_pola = document.querySelectorAll(".pole");
-  const bazaOdpowiedzi = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
+  let bazalosoweLitery = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
 
   let wynik_tury = 0;
   let dlugoscTury = 0;
@@ -20,11 +26,20 @@ przyciskStart.addEventListener("click", () => {
   const zmianaPoziomuTrudnosci = () => {
     console.log("Zmiana poziomu trudności");
     console.log(
-      `Zakończyłem poziom ${poziomTrudnosci} z wynikiem ${wynik_tury} poprawnych odpowiedzi`
+      `Zakończyłem poziom ${poziomTrudnosci} z wynikiem ${wynik_tury} poprawnych losoweLitery`
     );
-    if (wynik_tury === 0 || wynik_tury === 1) {
+    if (
+      wynik_tury === 0 ||
+      wynik_tury === 1 ||
+      wynik_tury === 3 ||
+      wynik_tury === 4 ||
+      wynik_tury === 5
+    ) {
       poziomTrudnosci -= 1;
-    } else if (wynik_tury === dlugoscGry - 1 || wynik_tury === dlugoscGry) {
+    } else if (
+      wynik_tury === dlugoscGry * 2 - 1 ||
+      wynik_tury === dlugoscGry * 2
+    ) {
       poziomTrudnosci += 1;
     } else {
       poziomTrudnosci = poziomTrudnosci;
@@ -45,45 +60,128 @@ przyciskStart.addEventListener("click", () => {
   const nowyStart = () => {
     przyciskStart.style.display = "block";
     przyciskWynik.style.display = "block";
+    przyciskPozycja.style.display = "none";
+    przyciskLitera.style.display = "none";
   };
 
-  //Zwraca array listę pól w danej turze w zaleznosci od poziomu trudnosci
-  const losowePola = () => {
+  let liczbaPoprawnychPozycji = 0;
+  let liczbaPoprawnychLiter = 0;
+
+  let poprawnePozycjeKomputera = [];
+  let poprawneLiteryKomputera = [];
+
+  //Funckja zwraca array listę pozycji w danej turze w zaleznosci od poziomu trudnosci
+  const losowePozycje = () => {
     let losoweLiczby = [];
-    console.log("zaczynam", poziomTrudnosci);
-    for (let i = 0; i < dlugoscGry; i++) {
-      losoweLiczby.push(Math.floor(Math.random() * 16));
+
+    //Losuje listę pozycji w której wyświetlą się litery.
+    const losowaniePozycji = () => {
+      for (let i = 0; i < dlugoscGry; i++) {
+        losoweLiczby.push(Math.floor(Math.random() * 9));
+      }
+
+      //Sprawdzam czy wylosowane pozycje zawierają conajmniej liczbę popawnych odpowiedzi równą poziomowi trudności.
+      for (let i = 0; i < dlugoscGry - poziomTrudnosci; i++) {
+        if (losoweLiczby[i] === losoweLiczby[i + poziomTrudnosci]) {
+          liczbaPoprawnychPozycji += 1;
+        }
+      }
+    };
+
+    //Jak nie to losuje ponownie.
+    while (liczbaPoprawnychPozycji < poziomTrudnosci) {
+      losoweLiczby = [];
+      poprawnePozycjeKomputera = [];
+      liczbaPoprawnychPozycji = 0;
+      losowaniePozycji();
     }
+
+    for (let j = 0; j < poziomTrudnosci; j++) {
+      poprawnePozycjeKomputera.push(undefined);
+    }
+
+    for (let i = 0; i < dlugoscGry - poziomTrudnosci; i++) {
+      if (losoweLiczby[i] === losoweLiczby[i + poziomTrudnosci]) {
+        poprawnePozycjeKomputera.push(losoweLiczby[i + poziomTrudnosci]);
+      } else {
+        poprawnePozycjeKomputera.push(undefined);
+      }
+    }
+
     console.log(losoweLiczby);
+    console.log(poprawnePozycjeKomputera);
     return losoweLiczby;
   };
 
-  let wynikiJednejKolejki = losowePola();
+  let wynikiPozycjiKomputera = losowePozycje();
 
-  const losoweOdpowiedzi = () => {
-    let odpowiedzi = [];
-    for (let i = 0; i < dlugoscGry; i++) {
-      odpowiedzi.push(bazaOdpowiedzi[Math.floor(Math.random() * 9)]);
+  //Zwraca array liste liter
+  const losoweLitery = () => {
+    let losoweLitery = [];
+
+    //Losowanie listy liter
+    const losowanieLiter = () => {
+      for (let i = 0; i < dlugoscGry; i++) {
+        losoweLitery.push(
+          bazalosoweLitery[Math.floor(Math.random() * poziomTrudnosci)]
+        );
+      }
+
+      //Sprawdzam czy wylosowane litery zawierają conajmniej liczbę popawnych odpowiedzi równą poziomowi trudności.
+      for (let i = 0; i < dlugoscGry - poziomTrudnosci; i++) {
+        if (losoweLitery[i] === losoweLitery[i + poziomTrudnosci]) {
+          liczbaPoprawnychLiter += 1;
+        }
+      }
+    };
+
+    //Jak nie to losuje ponownie.
+    while (liczbaPoprawnychLiter < poziomTrudnosci) {
+      losoweLitery = [];
+      poprawneLiteryKomputera = [];
+      liczbaPoprawnychLiter = 0;
+      losowanieLiter();
     }
-    console.log(odpowiedzi);
-    return odpowiedzi;
+
+    for (let j = 0; j < poziomTrudnosci; j++) {
+      poprawneLiteryKomputera.push(undefined);
+    }
+
+    for (let i = 0; i < dlugoscGry - poziomTrudnosci; i++) {
+      if (losoweLitery[i] === losoweLitery[i + poziomTrudnosci]) {
+        poprawneLiteryKomputera.push(losoweLitery[i + poziomTrudnosci]);
+        liczbaPoprawnychLiter += 1;
+      } else {
+        poprawneLiteryKomputera.push(undefined);
+      }
+    }
+
+    console.log(losoweLitery);
+    console.log(poprawneLiteryKomputera);
+
+    return losoweLitery;
   };
-  let wynikiOdpowiedzi = losoweOdpowiedzi();
+  let wynikiLiteryKomputera = losoweLitery();
+
+  let aktywnaPozycja;
 
   //Tura Komputera
   const turaKomputera = () => {
     console.log("Start tury komputera nr", dlugoscTury);
-    zezwolenieKliknieciaCzlowieka = false;
+    zezwolenieKliknieciaCzlowieka = true;
     //Podświetlanie wybranych pól na planszy
     const podwietlaniePol = () => {
       let time = 0;
 
       let interval = setInterval(function () {
         if (time < 1) {
-          pojawianiePola(wszystkie_pola[wynikiJednejKolejki[dlugoscTury]]);
-          wszystkie_pola[wynikiJednejKolejki[dlugoscTury]].innerHTML =
-            wynikiOdpowiedzi[dlugoscTury];
-          znikaniePola(wszystkie_pola[wynikiJednejKolejki[dlugoscTury]]);
+          aktywnaPozycja =
+            wszystkie_pola[wynikiPozycjiKomputera[dlugoscTury]].id;
+          aktywnaLitera = wynikiLiteryKomputera[dlugoscTury];
+          pojawianiePola(wszystkie_pola[wynikiPozycjiKomputera[dlugoscTury]]);
+          wszystkie_pola[wynikiPozycjiKomputera[dlugoscTury]].innerHTML =
+            wynikiLiteryKomputera[dlugoscTury];
+          znikaniePola(wszystkie_pola[wynikiPozycjiKomputera[dlugoscTury]]);
           time++;
         } else {
           clearInterval(interval);
@@ -111,14 +209,21 @@ przyciskStart.addEventListener("click", () => {
   turaKomputera();
 
   let wynikiKliknieciaCzlowieka = [];
+  let wynikiPozcyjiCzlowieka = [];
+  let wynikiLiteryCzlowieka = [];
 
-  wszystkie_pola.forEach((pole, i) => {
-    pole.addEventListener("click", () => {
-      if (zezwolenieKliknieciaCzlowieka === true) {
-        wynikiKliknieciaCzlowieka.push(i);
-        console.log(wynikiKliknieciaCzlowieka);
-      }
-    });
+  przyciskPozycja.addEventListener("click", () => {
+    if (zezwolenieKliknieciaCzlowieka === true) {
+      wynikiPozcyjiCzlowieka.push(aktywnaPozycja);
+      console.log("klik pozycji");
+    }
+  });
+
+  przyciskLitera.addEventListener("click", () => {
+    if (zezwolenieKliknieciaCzlowieka === true) {
+      wynikiLiteryCzlowieka.push(aktywnaLitera);
+      console.log("klik litery");
+    }
   });
 
   // Tura Człowieka
@@ -129,42 +234,71 @@ przyciskStart.addEventListener("click", () => {
     };
     klikniecieCzlowieka();
 
-    if (dlugoscTury < dlugoscGry - 1) {
+    if (dlugoscTury <= dlugoscGry - 1) {
       setTimeout(function () {
         // jeżeli użytkownik nie kliknie w daje turze, to dodajemy za niego undefined
-        if (wynikiKliknieciaCzlowieka.length < dlugoscTury + 1) {
-          wynikiKliknieciaCzlowieka.push(undefined);
+        if (wynikiLiteryCzlowieka.length < dlugoscTury + 1) {
+          wynikiLiteryCzlowieka.push(undefined);
         }
         //jeżeli użytkownik kliknie 2 razy w danej turze to zaliczamy tylko pierwsze kliknięcie
-        if (wynikiKliknieciaCzlowieka.length > dlugoscTury + 1) {
-          wynikiKliknieciaCzlowieka = wynikiKliknieciaCzlowieka.slice(
+        if (wynikiLiteryCzlowieka.length > dlugoscTury + 1) {
+          wynikiLiteryCzlowieka = wynikiLiteryCzlowieka.slice(
             0,
             dlugoscTury + 1
           );
         }
-        dlugoscTury += 1;
-        console.log("Odpowiedzi człowieka", wynikiKliknieciaCzlowieka);
+
+        // jeżeli użytkownik nie kliknie w daje turze, to dodajemy za niego undefined
+        if (wynikiPozcyjiCzlowieka.length < dlugoscTury + 1) {
+          wynikiPozcyjiCzlowieka.push(undefined);
+        }
+        //jeżeli użytkownik kliknie 2 razy w danej turze to zaliczamy tylko pierwsze kliknięcie
+        if (wynikiPozcyjiCzlowieka.length > dlugoscTury + 1) {
+          wynikiPozcyjiCzlowieka = wynikiPozcyjiCzlowieka.slice(
+            0,
+            dlugoscTury + 1
+          );
+        }
+
+        console.log(wynikiLiteryCzlowieka);
+        console.log(wynikiPozcyjiCzlowieka);
+
         console.log("koniec tury człowieka");
-        turaKomputera();
+        if (dlugoscTury < dlugoscGry - 1) {
+          dlugoscTury += 1;
+          turaKomputera();
+        }
       }, 1000);
-    } else if (dlugoscTury === dlugoscGry - 1) {
+    }
+    if (dlugoscTury === dlugoscGry - 1) {
       setTimeout(function () {
         console.log("Koniec");
-        console.log("Wynik komputera", wynikiJednejKolejki);
+        console.log(
+          "Wynik komputera",
+          poprawnePozycjeKomputera,
+          poprawneLiteryKomputera
+        );
 
         wynikiKliknieciaCzlowieka = wynikiKliknieciaCzlowieka.slice(
           poziomTrudnosci - 1,
           wynikiKliknieciaCzlowieka.length
         );
-        console.log("Wynik człowieka", wynikiKliknieciaCzlowieka);
+        console.log(
+          "Wynik człowieka",
+          wynikiPozcyjiCzlowieka,
+          wynikiLiteryCzlowieka
+        );
         for (let i = 0; i < dlugoscTury + 1; i++) {
-          if (wynikiJednejKolejki[i] === wynikiKliknieciaCzlowieka[i]) {
+          if (poprawnePozycjeKomputera[i] == wynikiPozcyjiCzlowieka[i]) {
+            wynik_tury += 1;
+          }
+          if (poprawneLiteryKomputera[i] == wynikiLiteryCzlowieka[i]) {
             wynik_tury += 1;
           }
         }
         console.log("Wynik tury", wynik_tury);
 
-        przyciskWynik.innerHTML = `Wynik ${wynik_tury}/${dlugoscGry}`;
+        przyciskWynik.innerHTML = `Wynik ${wynik_tury}/${dlugoscGry * 2}`;
         zmianaPoziomuTrudnosci();
       }, 1000);
     }

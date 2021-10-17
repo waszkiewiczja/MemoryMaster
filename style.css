@@ -17,7 +17,7 @@ body {
 .plansza {
   display: flex;
   flex-wrap: wrap;
-  max-width: 22rem;
+  max-width: 15rem;
   margin-bottom: 5rem;
 }
 
@@ -44,6 +44,7 @@ body {
   line-height: 1rem;
   padding: 1rem;
   margin-right: 1em;
+  caret-color: transparent;
 }
 
 .wynik {
@@ -52,4 +53,25 @@ body {
   line-height: 1rem;
   padding: 1rem;
   margin-right: 1em;
+  caret-color: transparent;
+}
+
+.pozycja {
+  background-color: rgb(80, 86, 92);
+  color: aliceblue;
+  line-height: 1rem;
+  padding: 1rem;
+  margin-right: 3em;
+  caret-color: transparent;
+  display: none;
+}
+
+.litera {
+  background-color: rgb(80, 86, 92);
+  color: aliceblue;
+  line-height: 1rem;
+  padding: 1rem;
+  margin-right: 1em;
+  caret-color: transparent;
+  display: none;
 }
