@@ -9,6 +9,11 @@
   </head>
   <body>
     <div class="main">
+      <div class="header">
+        <div class="nav modalmistrz">Mistrz pamięci</div>
+        <div class="nav modalzasady">Zasady gry</div>
+        <div class="nav modalustawienia">Ustawienia</div>
+      </div>
       <div class="plansza">
         <div class="pole" id="0"></div>
         <div class="pole" id="1" data-id="1"></div>
@@ -27,6 +32,86 @@
         <div><button class="litera">Litera</button></div>
       </div>
     </div>
+
+    <!-- <button class="btnmodal">Kliknij tutaj</button> -->
+    <div class="modal-bg">
+      <div class="modal">
+        <h2>Zasady gry</h2>
+        <p>Kliknij tutaj</p>
+
+        <span class="modal-close">X</span>
+      </div>
+    </div>
+
+    <div class="modal-bg-mistrz">
+      <div class="modal">
+        <h1>Mistrz pamięci</h1>
+        <p style="font-size: 1.5rem">Kliknij tutaj</p>
+
+        <span class="modal-close">X</span>
+      </div>
+    </div>
+
+    <div class="modal-bg-zasady">
+      <div class="modal">
+        <h1>Zasady gry</h1>
+        <p style="font-size: 1.5rem">
+          Zapamiętaj pojawiającą się literę i pole na której się pojawiła.
+          Litera i pole są niepowiązane.<br /><br />
+          Jeżeli dwie tury poźniej na tym samym lub dowolnym innym polu pojawiła
+          się <b>ta sama litera kliknij przycisk "Litera"</b>. Jeżeli dwie tury
+          później ta sama lub inna litera pojawiła się w
+          <b>tym samym polu kliknij przycisk "Pozycja"</b>. Jeżeli zgadza się
+          zarówno litera jak i pozycji to kliknij oba przyciski.<br /><br />
+          Jeżeli litera nie zgadza się z literą sprzed dwóch tur to nic nie
+          klikasz. Jeżeli pole nie zgadza się z polem sprzed dwóch tur to nic
+          nie klikasz.<br /><br />
+          Domyślnie ustawiony jest poziom trudności 2, co oznacza, że musisz
+          wskazać literę i pole, które pojawiło się dwie tury temu.
+          Automatycznie awansujesz poziom wyżej gdzy udzielisz 90% poprawnych
+          odpowiedzi. Automatycznie spadniesz poziom niżej, gdy nie udzielisz
+          żadnej poprawnej odpowiedzi.<br /><br />
+          W ustawieniach możesz ręcznie zmienić poziom trudności. Poziom
+          Trudności 3 oznacza, że musisz zapamiętać literę i pole, które
+          pojawiło się trzy tury temu. <br /><br />
+        </p>
+        <h1>Szczegółowe wytłumaczenie</h1>
+        <p style="font-size: 1.5rem">
+          Poziom trudności 2 (domyślny).<br /><br />
+          W turze 1 pojawi się losowa litera na losowym polu. Zapamiętaj literę
+          i pozycje. <br /><br />
+          W turze 2 pojawi się losowa litera na losowym polu. Zapamiętaj literę
+          i pozycje.<br /><br />
+          W turze 3 pojawi się losowa litera na losowym polu. Zapamiętaj literę
+          i pozycje. Jeżeli litera z tej tury odpowiada literze z tury 1 to
+          kliknij przycisk "Litera". Jeżeli pozycja z tej tury odpowiada pozycji
+          z tury 1 to kliknij przycisk "Pozycja".<br /><br />
+          W turze 4 pojawi się losowa litera na losowym polu. Zapamiętaj literę
+          i pozycje. Jeżeli litera z tej tury odpowiada literze z tury 2 to
+          kliknij przycisk "Litera". Jeżeli pozycja z tej tury odpowiada pozycji
+          z tury 2 to kliknij przycisk "Pozycja". <br /><br />
+          W turze 5 pojawi się losowa litera na losowym polu. Zapamiętaj literę
+          i pozycje. Jeżeli litera z tej tury odpowiada literze z tury 3 to
+          kliknij przycisk "Litera". Jeżeli pozycja z tej tury odpowiada pozycji
+          z tury 3 to kliknij przycisk "Pozycja". <br /><br />
+        </p>
+
+        <span class="modal-close">X</span>
+      </div>
+    </div>
+
+    <div class="modal-bg-ustawienia">
+      <div class="modal">
+        <h1>Ustawienia</h1>
+        <p>
+          Poziom trudności
+          <input type="text" value="2" id="inputPoziomTrudnosci" />
+        </p>
+
+        <span class="modal-close">X</span>
+      </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
     <script src="main.js"></script>
   </body>

@@ -3,7 +3,7 @@ const przyciskWynik = document.querySelector(".wynik");
 const przyciskPozycja = document.querySelector(".pozycja");
 const przyciskLitera = document.querySelector(".litera");
 
-let poziomTrudnosci = 2;
+let poziomTrudnosci = 3;
 
 przyciskStart.addEventListener("click", () => {
   przyciskStart.style.display = "none";
@@ -20,13 +20,11 @@ przyciskStart.addEventListener("click", () => {
   let dlugoscGry = 5 + poziomTrudnosci;
   let zezwolenieKliknieciaCzlowieka = false;
 
-  // jeżeli jest poziom trudnosci trzy to sprawdzam co było pokazane 3 klikniecia temu  Czyli wyswietlanie idzie caly czas w tempie 1 sek on 1 sek off
-
-  //Koniec całej kolejki pięciu tur
+  //Koniec całej tury
   const zmianaPoziomuTrudnosci = () => {
     console.log("Zmiana poziomu trudności");
     console.log(
-      `Zakończyłem poziom ${poziomTrudnosci} z wynikiem ${wynik_tury} poprawnych losoweLitery`
+      `Zakończyłem poziom ${poziomTrudnosci} z wynikiem ${wynik_tury} poprawnych odpowiedzi`
     );
     if (
       wynik_tury === 0 ||
@@ -95,11 +93,10 @@ przyciskStart.addEventListener("click", () => {
       liczbaPoprawnychPozycji = 0;
       losowaniePozycji();
     }
-
+    //Tworze liste poprawnych odpowiedzi
     for (let j = 0; j < poziomTrudnosci; j++) {
       poprawnePozycjeKomputera.push(undefined);
     }
-
     for (let i = 0; i < dlugoscGry - poziomTrudnosci; i++) {
       if (losoweLiczby[i] === losoweLiczby[i + poziomTrudnosci]) {
         poprawnePozycjeKomputera.push(losoweLiczby[i + poziomTrudnosci]);
@@ -143,10 +140,10 @@ przyciskStart.addEventListener("click", () => {
       losowanieLiter();
     }
 
+    //Tworze liste poprawnych odpowiedzi
     for (let j = 0; j < poziomTrudnosci; j++) {
       poprawneLiteryKomputera.push(undefined);
     }
-
     for (let i = 0; i < dlugoscGry - poziomTrudnosci; i++) {
       if (losoweLitery[i] === losoweLitery[i + poziomTrudnosci]) {
         poprawneLiteryKomputera.push(losoweLitery[i + poziomTrudnosci]);
@@ -164,11 +161,13 @@ przyciskStart.addEventListener("click", () => {
   let wynikiLiteryKomputera = losoweLitery();
 
   let aktywnaPozycja;
+  let aktywnaLitera;
 
   //Tura Komputera
   const turaKomputera = () => {
     console.log("Start tury komputera nr", dlugoscTury);
     zezwolenieKliknieciaCzlowieka = true;
+
     //Podświetlanie wybranych pól na planszy
     const podwietlaniePol = () => {
       let time = 0;
@@ -205,7 +204,6 @@ przyciskStart.addEventListener("click", () => {
       }, 1000);
     };
   };
-
   turaKomputera();
 
   let wynikiKliknieciaCzlowieka = [];
@@ -216,6 +214,23 @@ przyciskStart.addEventListener("click", () => {
     if (zezwolenieKliknieciaCzlowieka === true) {
       wynikiPozcyjiCzlowieka.push(aktywnaPozycja);
       console.log("klik pozycji");
+    }
+  });
+
+  window.addEventListener("keydown", (e) => {
+    console.log(e.key);
+    if (e.key === "a" || e.key === "ArrowLeft") {
+      if (zezwolenieKliknieciaCzlowieka === true) {
+        wynikiPozcyjiCzlowieka.push(aktywnaPozycja);
+        console.log("klik pozycji");
+      }
+    }
+
+    if (e.key === "d" || e.key === "ArrowRight") {
+      if (zezwolenieKliknieciaCzlowieka === true) {
+        wynikiLiteryCzlowieka.push(aktywnaLitera);
+        console.log("klik litery");
+      }
     }
   });
 
@@ -260,9 +275,6 @@ przyciskStart.addEventListener("click", () => {
           );
         }
 
-        console.log(wynikiLiteryCzlowieka);
-        console.log(wynikiPozcyjiCzlowieka);
-
         console.log("koniec tury człowieka");
         if (dlugoscTury < dlugoscGry - 1) {
           dlugoscTury += 1;
@@ -270,9 +282,11 @@ przyciskStart.addEventListener("click", () => {
         }
       }, 1000);
     }
+
+    //Ostatnia tura gry
     if (dlugoscTury === dlugoscGry - 1) {
       setTimeout(function () {
-        console.log("Koniec");
+        console.log("Koniec gry");
         console.log(
           "Wynik komputera",
           poprawnePozycjeKomputera,
@@ -288,6 +302,8 @@ przyciskStart.addEventListener("click", () => {
           wynikiPozcyjiCzlowieka,
           wynikiLiteryCzlowieka
         );
+
+        //Sprawdzanie wyniku gry
         for (let i = 0; i < dlugoscTury + 1; i++) {
           if (poprawnePozycjeKomputera[i] == wynikiPozcyjiCzlowieka[i]) {
             wynik_tury += 1;
@@ -303,4 +319,55 @@ przyciskStart.addEventListener("click", () => {
       }, 1000);
     }
   };
+});
+
+//
+//
+// Modal popup
+const btnmodalAll = document.querySelectorAll(".btnmodal");
+const modalBg = document.querySelector(".modal-bg");
+const modalCloseAll = document.querySelectorAll(".modal-close");
+
+const modalMistrz = document.querySelector(".modalmistrz");
+const modalmZasady = document.querySelector(".modalzasady");
+const modalUstawienia = document.querySelector(".modalustawienia");
+
+const modalBgMistrz = document.querySelector(".modal-bg-mistrz");
+const modalBgZasady = document.querySelector(".modal-bg-zasady");
+const modalBgUstawienia = document.querySelector(".modal-bg-ustawienia");
+
+btnmodalAll.forEach((btnmodal) => {
+  btnmodal.addEventListener("click", () => {
+    modalBg.classList.add("modal-bg-active");
+  });
+});
+
+modalCloseAll.forEach((modalClose) => {
+  modalClose.addEventListener("click", () => {
+    modalBg.classList.remove("modal-bg-active");
+    modalBgMistrz.classList.remove("modal-bg-active");
+    modalBgZasady.classList.remove("modal-bg-active");
+    modalBgUstawienia.classList.remove("modal-bg-active");
+  });
+});
+
+modalMistrz.addEventListener("click", () => {
+  modalBgMistrz.classList.add("modal-bg-active");
+});
+
+modalmZasady.addEventListener("click", () => {
+  modalBgZasady.classList.add("modal-bg-active");
+});
+
+modalUstawienia.addEventListener("click", () => {
+  modalBgUstawienia.classList.add("modal-bg-active");
+});
+
+//Odczytanie poziom trudności z ustawień
+
+const inputPoziomTrudnosci = document.querySelector("#inputPoziomTrudnosci");
+
+inputPoziomTrudnosci.addEventListener("change", () => {
+  console.log(inputPoziomTrudnosci.value);
+  poziomTrudnosci = Number(inputPoziomTrudnosci.value);
 });
