@@ -46,7 +46,24 @@
     <div class="modal-bg-mistrz">
       <div class="modal">
         <h1>Mistrz pamięci</h1>
-        <p style="font-size: 1.5rem">Kliknij tutaj</p>
+        <p class="opis">
+          Trening mózgu opiera się na założeniu, że stymulacja umysłowa może
+          poprawić neuroplastyczność. Jest to zdolność mózgu do tworzenia i
+          reorganizacji połączeń między komórkami mózgowymi w odpowiedzi na nowe
+          bodźce i zadania. Badanie Brain Training Game Boosts Executive
+          Functions opublikowane w PLOS One w 2013 r. wykazało, że osoby, które
+          angażowały się w gry treningowe mózgu, wykazywały poprawę szybkości
+          przetwarzania informacji, pamięci i funkcji wykonawczych.<br /><br />
+          Mistrz Pamięci to gra, która intensywanie symuluje pamięć
+          krótkotrwałą, poprawia skupienie i koncentrację.<br /><br />
+          Polega na zapamiętaniu pojawiających się liter i pozycji na planszy
+          oraz w wersji rozszerzonej również kolorów liter i kształtów pól. Wraz
+          ze wzrostem trudności musimy zapamiętywać coraz większe ilości
+          informacji.<br /><br />
+          Gra wymaga od nas jednoczesnego zapamiętywania informacji jak i
+          wykorzystywania informacji już zapamiętanych mocno stymulując pracę
+          mózgu.
+        </p>
 
         <span class="modal-close">X</span>
       </div>
@@ -55,9 +72,9 @@
     <div class="modal-bg-zasady">
       <div class="modal">
         <h1>Zasady gry</h1>
-        <p style="font-size: 1.5rem">
+        <p class="opis">
           Zapamiętaj pojawiającą się literę i pole na której się pojawiła.
-          Litera i pole są niepowiązane.<br /><br />
+          Litera i pole są niepowiązane i niezależne.<br /><br />
           Jeżeli dwie tury poźniej na tym samym lub dowolnym innym polu pojawiła
           się <b>ta sama litera kliknij przycisk "Litera"</b>. Jeżeli dwie tury
           później ta sama lub inna litera pojawiła się w
@@ -76,7 +93,7 @@
           pojawiło się trzy tury temu. <br /><br />
         </p>
         <h1>Szczegółowe wytłumaczenie</h1>
-        <p style="font-size: 1.5rem">
+        <p class="opis">
           Poziom trudności 2 (domyślny).<br /><br />
           W turze 1 pojawi się losowa litera na losowym polu. Zapamiętaj literę
           i pozycje. <br /><br />
@@ -103,9 +120,20 @@
     <div class="modal-bg-ustawienia">
       <div class="modal">
         <h1>Ustawienia</h1>
-        <p>
+        <p class="opis">
           Poziom trudności
-          <input type="text" value="2" id="inputPoziomTrudnosci" />
+          <input
+            type="number"
+            value="2"
+            id="inputPoziomTrudnosci"
+          /><br /><br />
+
+          Kolor tła biały <input type="checkbox" id="inputKolorTła" />
+          <br /><br />
+          Kolory liter
+          <input type="checkbox" id="inputKolorTła" /><br /><br />
+          Kształty pól
+          <input type="checkbox" id="inputKolorTła" />
         </p>
 
         <span class="modal-close">X</span>
