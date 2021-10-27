@@ -20,6 +20,10 @@ body {
   display: flex;
 }
 
+.tresc {
+  background-color: rgb(24, 24, 24);
+}
+
 .nav {
   margin: 2rem;
   caret-color: transparent;
@@ -59,27 +63,31 @@ body {
 }
 
 .start {
-  background-color: rgb(80, 86, 92);
+  background-color: rgb(57, 61, 65);
   color: rgb(217, 223, 228);
   font-size: 1.3rem;
   line-height: 1rem;
   padding: 1.4rem;
   margin: 1rem;
   caret-color: transparent;
+  border: 1px solid wheat;
+  cursor: pointer;
 }
 
 .wynik {
-  background-color: rgb(80, 86, 92);
+  background-color: rgb(57, 61, 65);
   color: rgb(217, 223, 228);
   font-size: 1.3rem;
   line-height: 1rem;
   padding: 1.4rem;
   margin: 1rem;
   caret-color: transparent;
+  border: 1px solid wheat;
+  display: none;
 }
 
 .pozycja {
-  background-color: rgb(80, 86, 92);
+  background-color: rgb(57, 61, 65);
   color: rgb(217, 223, 228);
   font-size: 1.3rem;
   line-height: 1rem;
@@ -87,10 +95,12 @@ body {
   margin: 1rem;
   caret-color: transparent;
   display: none;
+  border: 1px solid rgb(153, 137, 110);
+  cursor: pointer;
 }
 
 .litera {
-  background-color: rgb(80, 86, 92);
+  background-color: rgb(57, 61, 65);
   color: rgb(217, 223, 228);
   font-size: 1.3rem;
   line-height: 1rem;
@@ -98,6 +108,13 @@ body {
   margin: 1rem;
   caret-color: transparent;
   display: none;
+  border: 1px solid rgb(153, 137, 110);
+  cursor: pointer;
+}
+
+.pozycja:active,
+.litera:active {
+  background-color: rgb(47, 41, 15);
 }
 
 /* // */
@@ -113,7 +130,7 @@ body {
   height: 100vh;
   top: 0;
   left: 0;
-  background: rgba(20, 20, 20, 0.5);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -129,9 +146,9 @@ body {
 
 .modal {
   position: relative;
-  background: #2f2f2f;
-  width: 60%;
-  max-height: 60%;
+  background: rgb(17, 17, 17);
+  max-width: 40rem;
+  max-height: 40%;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
@@ -140,6 +157,7 @@ body {
   padding: 3rem;
   text-align: justify;
   overflow-y: auto;
+  border: 1px solid wheat;
 }
 
 .modal-close {
@@ -160,7 +178,7 @@ body {
 }
 
 input[type="number"] {
-  width: 6%;
+  width: 8%;
   text-align: center;
   font-size: 1.3rem;
 }
@@ -168,4 +186,23 @@ input[type="number"] {
 input[type="checkbox"] {
   transform: scale(2);
   margin-left: 1rem;
+}
+
+/* skrol */
+::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgb(180, 146, 83);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(153, 137, 110);
 }
