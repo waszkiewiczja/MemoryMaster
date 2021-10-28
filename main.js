@@ -2,6 +2,8 @@ const przyciskStart = document.querySelector(".start");
 const przyciskWynik = document.querySelector(".wynik");
 const przyciskPozycja = document.querySelector(".pozycja");
 const przyciskLitera = document.querySelector(".litera");
+const przyciskKolor = document.querySelector(".kolor");
+const inputPoziomTrudnosci = document.querySelector("#inputPoziomTrudnosci");
 
 let poziomTrudnosci = 2;
 let poziomKoloryAktywny = false;
@@ -11,6 +13,10 @@ przyciskStart.addEventListener("click", () => {
   przyciskWynik.style.display = "none";
   przyciskPozycja.style.display = "block";
   przyciskLitera.style.display = "block";
+
+  if (localStorage.getItem("aktywneKolory") == "1") {
+    przyciskKolor.style.display = "block";
+  }
 
   const wszystkie_pola = document.querySelectorAll(".pole");
   const bazalosoweLitery = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
@@ -31,17 +37,27 @@ przyciskStart.addEventListener("click", () => {
   let dlugoscGry = 4 + poziomTrudnosci * 2;
   let zezwolenieKliknieciaCzlowieka = false;
 
+  // Trudnosc 2 lub 3
+  let lvlTrudnosci;
+  if (poziomKoloryAktywny == true) {
+    lvlTrudnosci = 3;
+  } else if (poziomKoloryAktywny == false) {
+    lvlTrudnosci = 2;
+  }
+
   //Koniec całej tury
   const zmianaPoziomuTrudnosci = () => {
     console.log("Zmiana poziomu trudności");
     console.log(
       `Zakończyłem poziom ${poziomTrudnosci} z wynikiem ${wynik_tury} poprawnych odpowiedzi`
     );
-    if (wynik_tury / (dlugoscGry * 2) < 0.5) {
+
+    //Obliczanie wyniku i następnego poziomu trudnosci
+    if (wynik_tury / (dlugoscGry * lvlTrudnosci) < 0.5) {
       poziomTrudnosci -= 1;
     } else if (
-      wynik_tury === dlugoscGry * 2 - 1 ||
-      wynik_tury === dlugoscGry * 2
+      wynik_tury === dlugoscGry * lvlTrudnosci - 1 ||
+      wynik_tury === dlugoscGry * lvlTrudnosci
     ) {
       poziomTrudnosci += 1;
     } else {
@@ -52,9 +68,10 @@ przyciskStart.addEventListener("click", () => {
       poziomTrudnosci = 1;
     }
 
-    if (poziomTrudnosci >= 9) {
-      poziomTrudnosci = 9;
+    if (poziomTrudnosci >= 8) {
+      poziomTrudnosci = 8;
     }
+    inputPoziomTrudnosci.value = poziomTrudnosci;
 
     console.log("Nowy poziom trudnosci", poziomTrudnosci);
     nowyStart();
@@ -65,6 +82,7 @@ przyciskStart.addEventListener("click", () => {
     przyciskWynik.style.display = "block";
     przyciskPozycja.style.display = "none";
     przyciskLitera.style.display = "none";
+    przyciskKolor.style.display = "none";
   };
 
   let liczbaPoprawnychPozycji = 0;
@@ -255,15 +273,11 @@ przyciskStart.addEventListener("click", () => {
     podwietlaniePol();
 
     // Animacja pojawiania pola
-    const pojawianiePola = (pole) => {
-      // pole.style.background = "white";
-      // pole.style.transition = "0.5s ease";
-    };
+    const pojawianiePola = (pole) => {};
 
     //Animacja znikania pola
     const znikaniePola = (pole) => {
       setTimeout(function () {
-        // pole.style.background = "#1d1d1d";
         pole.innerHTML = "";
       }, 1000);
     };
@@ -273,6 +287,7 @@ przyciskStart.addEventListener("click", () => {
   let wynikiKliknieciaCzlowieka = [];
   let wynikiPozcyjiCzlowieka = [];
   let wynikiLiteryCzlowieka = [];
+  let wynikiKoloryCzlowieka = [];
 
   przyciskPozycja.addEventListener("click", () => {
     if (zezwolenieKliknieciaCzlowieka === true) {
@@ -302,6 +317,13 @@ przyciskStart.addEventListener("click", () => {
     if (zezwolenieKliknieciaCzlowieka === true) {
       wynikiLiteryCzlowieka.push(aktywnaLitera);
       console.log("klik litery");
+    }
+  });
+
+  przyciskKolor.addEventListener("click", () => {
+    if (zezwolenieKliknieciaCzlowieka === true) {
+      wynikiKoloryCzlowieka.push(aktywnyKolor);
+      console.log("klik kolor");
     }
   });
 
@@ -339,6 +361,18 @@ przyciskStart.addEventListener("click", () => {
           );
         }
 
+        // jeżeli użytkownik nie kliknie w daje turze, to dodajemy za niego undefined
+        if (wynikiKoloryCzlowieka.length < dlugoscTury + 1) {
+          wynikiKoloryCzlowieka.push(undefined);
+        }
+        //jeżeli użytkownik kliknie 2 razy w danej turze to zaliczamy tylko pierwsze kliknięcie
+        if (wynikiKoloryCzlowieka.length > dlugoscTury + 1) {
+          wynikiKoloryCzlowieka = wynikiKoloryCzlowieka.slice(
+            0,
+            dlugoscTury + 1
+          );
+        }
+
         console.log("koniec tury człowieka");
         if (dlugoscTury < dlugoscGry - 1) {
           dlugoscTury += 1;
@@ -354,7 +388,8 @@ przyciskStart.addEventListener("click", () => {
         console.log(
           "Wynik komputera",
           poprawnePozycjeKomputera,
-          poprawneLiteryKomputera
+          poprawneLiteryKomputera,
+          poprawneKoloryKomputera
         );
 
         wynikiKliknieciaCzlowieka = wynikiKliknieciaCzlowieka.slice(
@@ -364,7 +399,8 @@ przyciskStart.addEventListener("click", () => {
         console.log(
           "Wynik człowieka",
           wynikiPozcyjiCzlowieka,
-          wynikiLiteryCzlowieka
+          wynikiLiteryCzlowieka,
+          wynikiKoloryCzlowieka
         );
 
         //Sprawdzanie wyniku gry
@@ -375,10 +411,17 @@ przyciskStart.addEventListener("click", () => {
           if (poprawneLiteryKomputera[i] == wynikiLiteryCzlowieka[i]) {
             wynik_tury += 1;
           }
+          if (aktywnyKolor === true) {
+            if (poprawneKoloryKomputera[i] == wynikiKoloryCzlowieka[i]) {
+              wynik_tury += 1;
+            }
+          }
         }
         console.log("Wynik tury", wynik_tury);
 
-        przyciskWynik.innerHTML = `Wynik ${wynik_tury}/${dlugoscGry * 2}`;
+        przyciskWynik.innerHTML = `Wynik ${wynik_tury}/${
+          dlugoscGry * lvlTrudnosci
+        }`;
         zmianaPoziomuTrudnosci();
       }, 1000);
     }
@@ -428,7 +471,6 @@ modalUstawienia.addEventListener("click", () => {
 });
 
 //Odczytanie poziom trudności z ustawień
-const inputPoziomTrudnosci = document.querySelector("#inputPoziomTrudnosci");
 
 inputPoziomTrudnosci.addEventListener("change", () => {
   poziomTrudnosci = Number(inputPoziomTrudnosci.value);
@@ -447,6 +489,12 @@ const inputKoloryLiter = document.querySelector("#inputKoloryLiter");
 inputKoloryLiter.addEventListener("change", (e) => {
   if (inputKoloryLiter.checked) {
     poziomKoloryAktywny = true;
+    localStorage.setItem("aktywneKolory", "1");
+  }
+
+  if (!inputKoloryLiter.checked) {
+    poziomKoloryAktywny = false;
+    localStorage.setItem("aktywneKolory", "0");
   }
 });
 
@@ -477,15 +525,15 @@ const zmianaNaBialeTlo = () => {
   const buttonlitera = document.querySelector(".litera");
   buttonlitera.classList.add("literawhite");
 
+  const buttonkolor = document.querySelector(".kolor");
+  buttonkolor.classList.add("kolorwhite");
+
   inputKolorTla.checked = true;
 
-  const modalBgMistrz = document.querySelector(".modal-bg-mistrz");
   modalBgMistrz.classList.add("modal-bg-mistrz-white");
 
-  const modalBgZasady = document.querySelector(".modal-bg-zasady");
   modalBgZasady.classList.add("modal-bg-zasady-white");
 
-  const modalBgUstawienia = document.querySelector(".modal-bg-ustawienia");
   modalBgUstawienia.classList.add("modal-bg-ustawienia-white");
 };
 
@@ -525,16 +573,14 @@ inputKolorTla.addEventListener("change", (e) => {
 
     const buttonlitera = document.querySelector(".litera");
     buttonlitera.classList.remove("literawhite");
+
+    const buttonkolor = document.querySelector(".kolor");
+    buttonkolor.classList.remove("kolorwhite");
   }
 });
 
 //local Storage
-
 window.addEventListener("DOMContentLoaded", () => {
-  localStorage.setItem("test", "1");
-  console.log(localStorage.getItem("test"));
-  console.log(localStorage);
-
   if (localStorage.getItem("tloBiale") == "1") {
     zmianaNaBialeTlo();
   }
