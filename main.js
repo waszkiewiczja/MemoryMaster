@@ -449,3 +449,93 @@ inputKoloryLiter.addEventListener("change", (e) => {
     poziomKoloryAktywny = true;
   }
 });
+
+//Funkcja zmiany tla
+const zmianaNaBialeTlo = () => {
+  const divmain = document.querySelector(".main");
+  divmain.style = "background:rgb(235,235,235)";
+
+  const divNavAll = document.querySelectorAll(".nav");
+  divNavAll.forEach((nav) => {
+    nav.classList.add("navwhite");
+  });
+
+  const divPoleAll = document.querySelectorAll(".pole");
+  divPoleAll.forEach((pole) => {
+    pole.classList.add("polewhite");
+  });
+
+  const buttonstart = document.querySelector(".start");
+  buttonstart.classList.add("startwhite");
+
+  const buttonwynik = document.querySelector(".wynik");
+  buttonwynik.classList.add("wynikwhite");
+
+  const buttonpozycja = document.querySelector(".pozycja");
+  buttonpozycja.classList.add("pozycjawhite");
+
+  const buttonlitera = document.querySelector(".litera");
+  buttonlitera.classList.add("literawhite");
+
+  inputKolorTla.checked = true;
+
+  const modalBgMistrz = document.querySelector(".modal-bg-mistrz");
+  modalBgMistrz.classList.add("modal-bg-mistrz-white");
+
+  const modalBgZasady = document.querySelector(".modal-bg-zasady");
+  modalBgZasady.classList.add("modal-bg-zasady-white");
+
+  const modalBgUstawienia = document.querySelector(".modal-bg-ustawienia");
+  modalBgUstawienia.classList.add("modal-bg-ustawienia-white");
+};
+
+//Odczytanie tla z ustawień
+const inputKolorTla = document.querySelector("#inputKolorTla");
+
+inputKolorTla.addEventListener("change", (e) => {
+  if (inputKolorTla.checked) {
+    localStorage.setItem("tloBiale", "1");
+    zmianaNaBialeTlo();
+  }
+  if (!inputKolorTla.checked) {
+    inputKolorTla.checked = false;
+    localStorage.setItem("tloBiale", "0");
+
+    const divmain = document.querySelector(".main");
+    divmain.style = "background:rgb(24, 24, 24);";
+
+    const divNavAll = document.querySelectorAll(".nav");
+    divNavAll.forEach((nav) => {
+      nav.classList.remove("navwhite");
+    });
+
+    const divPoleAll = document.querySelectorAll(".pole");
+    divPoleAll.forEach((pole) => {
+      pole.classList.remove("polewhite");
+    });
+
+    const buttonstart = document.querySelector(".start");
+    buttonstart.classList.remove("startwhite");
+
+    const buttonwynik = document.querySelector(".wynik");
+    buttonwynik.classList.remove("wynikwhite");
+
+    const buttonpozycja = document.querySelector(".pozycja");
+    buttonpozycja.classList.remove("pozycjawhite");
+
+    const buttonlitera = document.querySelector(".litera");
+    buttonlitera.classList.remove("literawhite");
+  }
+});
+
+//local Storage
+
+window.addEventListener("DOMContentLoaded", () => {
+  localStorage.setItem("test", "1");
+  console.log(localStorage.getItem("test"));
+  console.log(localStorage);
+
+  if (localStorage.getItem("tloBiale") == "1") {
+    zmianaNaBialeTlo();
+  }
+});

@@ -12,6 +12,7 @@ body {
   min-height: 100vh;
   margin: 0;
   background-color: rgb(24, 24, 24);
+  caret-color: transparent;
 }
 
 .header {
@@ -31,6 +32,10 @@ body {
 
 .nav:hover {
   color: aliceblue;
+}
+
+.navwhite:hover {
+  color: rgb(17, 17, 17);
 }
 
 .mozgimg {
@@ -55,6 +60,11 @@ body {
   font-size: 2rem;
   color: aliceblue;
   caret-color: transparent;
+}
+
+.polewhite {
+  background: rgb(200, 200, 200);
+  color: #2f2f2f;
 }
 
 .startdiv {
@@ -111,10 +121,25 @@ body {
   border: 1px solid rgb(153, 137, 110);
   cursor: pointer;
 }
-
+.start:active,
 .pozycja:active,
 .litera:active {
   background-color: rgb(47, 41, 15);
+}
+
+.startwhite,
+.wynikwhite,
+.pozycjawhite,
+.literawhite {
+  background-color: rgb(200, 200, 200);
+  color: #2f2f2f;
+  border: 1px solid wheat;
+}
+
+.startwhite:active,
+.pozycjawhite:active,
+.literawhite:active {
+  background-color: rgb(238, 231, 201);
 }
 
 /* // */
@@ -130,13 +155,18 @@ body {
   height: 100vh;
   top: 0;
   left: 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s, opacity 0.5s;
+}
+
+.modal-bg-mistrz-white,
+.modal-bg-zasady-white,
+.modal-bg-ustawienia-white {
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .modal-bg-active {
@@ -158,6 +188,7 @@ body {
   text-align: justify;
   overflow-y: auto;
   border: 1px solid wheat;
+  caret-color: transparent;
 }
 
 .modal-close {
