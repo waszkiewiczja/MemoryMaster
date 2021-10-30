@@ -4,9 +4,80 @@ const przyciskPozycja = document.querySelector(".pozycja");
 const przyciskLitera = document.querySelector(".litera");
 const przyciskKolor = document.querySelector(".kolor");
 const inputPoziomTrudnosci = document.querySelector("#inputPoziomTrudnosci");
+const ostatnieWyniki = document.querySelector("#ostatnieWyniki");
 
 let poziomTrudnosci = 2;
 let poziomKoloryAktywny = false;
+
+let wyniki = [];
+let wynikiPoziomTrudnosci = [];
+let wynikiMaxWynik = [];
+let historiaWynikow = "";
+
+// wyswietlanie historii wynikow
+if (localStorage.getItem("historiaPoziomTrudnosci0") === null) {
+  localStorage.setItem("historiaPoziomTrudnosci0", 9);
+} else {
+  historiaWynikow = `1. Poziom trudności ${localStorage.getItem(
+    "historiaPoziomTrudnosci0"
+  )}, wynik ${localStorage.getItem("historiaWynik0")}/${localStorage.getItem(
+    "historiaMaxWynik0"
+  )} <br><br>`;
+}
+
+if (
+  localStorage.getItem("historiaPoziomTrudnosci1") === null ||
+  localStorage.getItem("historiaPoziomTrudnosci1") > 8
+) {
+  localStorage.setItem("historiaPoziomTrudnosci1", 9);
+} else {
+  historiaWynikow = ` ${historiaWynikow} 2. Poziom trudności ${localStorage.getItem(
+    "historiaPoziomTrudnosci1"
+  )}, wynik ${localStorage.getItem("historiaWynik1")}/${localStorage.getItem(
+    "historiaMaxWynik1"
+  )} <br><br>`;
+}
+
+if (
+  localStorage.getItem("historiaPoziomTrudnosci2") === null ||
+  localStorage.getItem("historiaPoziomTrudnosci2") > 8
+) {
+  localStorage.setItem("historiaPoziomTrudnosci2", 9);
+} else {
+  historiaWynikow = ` ${historiaWynikow} 3. Poziom trudności ${localStorage.getItem(
+    "historiaPoziomTrudnosci2"
+  )}, wynik ${localStorage.getItem("historiaWynik2")}/${localStorage.getItem(
+    "historiaMaxWynik2"
+  )} <br><br>`;
+}
+
+if (
+  localStorage.getItem("historiaPoziomTrudnosci3") === null ||
+  localStorage.getItem("historiaPoziomTrudnosci3") > 8
+) {
+  localStorage.setItem("historiaPoziomTrudnosci3", 9);
+} else {
+  historiaWynikow = ` ${historiaWynikow} 4. Poziom trudności ${localStorage.getItem(
+    "historiaPoziomTrudnosci3"
+  )}, wynik ${localStorage.getItem("historiaWynik3")}/${localStorage.getItem(
+    "historiaMaxWynik3"
+  )} <br><br>`;
+}
+
+if (
+  localStorage.getItem("historiaPoziomTrudnosci4") === null ||
+  localStorage.getItem("historiaPoziomTrudnosci4") > 8
+) {
+  localStorage.setItem("historiaPoziomTrudnosci4", 9);
+} else {
+  historiaWynikow = ` ${historiaWynikow} 5. Poziom trudności ${localStorage.getItem(
+    "historiaPoziomTrudnosci4"
+  )}, wynik ${localStorage.getItem("historiaWynik4")}/${localStorage.getItem(
+    "historiaMaxWynik4"
+  )} <br><br>`;
+}
+
+ostatnieWyniki.innerHTML = historiaWynikow;
 
 przyciskStart.addEventListener("click", () => {
   przyciskStart.style.display = "none";
@@ -53,11 +124,11 @@ przyciskStart.addEventListener("click", () => {
     );
 
     //Obliczanie wyniku i następnego poziomu trudnosci
-    if (wynik_tury / (dlugoscGry * lvlTrudnosci) < 0.5) {
+    if (wynik_tury === 0 || wynik_tury === 1) {
       poziomTrudnosci -= 1;
     } else if (
-      wynik_tury === dlugoscGry * lvlTrudnosci - 1 ||
-      wynik_tury === dlugoscGry * lvlTrudnosci
+      wynik_tury === liczbaPoprawnychOdpowiedzi - 1 ||
+      wynik_tury === liczbaPoprawnychOdpowiedzi
     ) {
       poziomTrudnosci += 1;
     } else {
@@ -85,6 +156,7 @@ przyciskStart.addEventListener("click", () => {
     przyciskKolor.style.display = "none";
   };
 
+  let liczbaPoprawnychOdpowiedzi = 0;
   let liczbaPoprawnychPozycji = 0;
   let liczbaPoprawnychLiter = 0;
   let liczbaPoprawnychKolorow = 0;
@@ -127,6 +199,12 @@ przyciskStart.addEventListener("click", () => {
         poprawnePozycjeKomputera.push(losoweLiczby[i + poziomTrudnosci]);
       } else {
         poprawnePozycjeKomputera.push(undefined);
+      }
+    }
+
+    for (let i = 0; i < poprawnePozycjeKomputera.length; i++) {
+      if (poprawnePozycjeKomputera[i]) {
+        liczbaPoprawnychOdpowiedzi += 1;
       }
     }
 
@@ -179,6 +257,12 @@ przyciskStart.addEventListener("click", () => {
       }
     }
 
+    for (let i = 0; i < poprawneLiteryKomputera.length; i++) {
+      if (poprawneLiteryKomputera[i]) {
+        liczbaPoprawnychOdpowiedzi += 1;
+      }
+    }
+
     console.log(losoweLitery);
     console.log(poprawneLiteryKomputera);
 
@@ -225,6 +309,14 @@ przyciskStart.addEventListener("click", () => {
         liczbaPoprawnychKolorow += 1;
       } else {
         poprawneKoloryKomputera.push(undefined);
+      }
+    }
+
+    if (poziomKoloryAktywny) {
+      for (let i = 0; i < poprawneKoloryKomputera.length; i++) {
+        if (poprawneKoloryKomputera[i]) {
+          liczbaPoprawnychOdpowiedzi += 1;
+        }
       }
     }
 
@@ -305,10 +397,17 @@ przyciskStart.addEventListener("click", () => {
       }
     }
 
-    if (e.key === "d" || e.key === "ArrowRight") {
+    if (e.key === "s" || e.key === "ArrowDown") {
       if (zezwolenieKliknieciaCzlowieka === true) {
         wynikiLiteryCzlowieka.push(aktywnaLitera);
         console.log("klik litery");
+      }
+    }
+
+    if (e.key === "d" || e.key === "ArrowRight") {
+      if (zezwolenieKliknieciaCzlowieka === true) {
+        wynikiKoloryCzlowieka.push(aktywnyKolor);
+        console.log("klik kolor");
       }
     }
   });
@@ -404,24 +503,111 @@ przyciskStart.addEventListener("click", () => {
         );
 
         //Sprawdzanie wyniku gry
-        for (let i = 0; i < dlugoscTury + 1; i++) {
+        for (let i = 0; i <= dlugoscTury + 1; i++) {
           if (poprawnePozycjeKomputera[i] == wynikiPozcyjiCzlowieka[i]) {
-            wynik_tury += 1;
+            if (poprawnePozycjeKomputera[i] !== undefined) {
+              wynik_tury += 1;
+            }
           }
+
           if (poprawneLiteryKomputera[i] == wynikiLiteryCzlowieka[i]) {
-            wynik_tury += 1;
+            if (poprawneLiteryKomputera[i] !== undefined) {
+              wynik_tury += 1;
+            }
           }
           if (aktywnyKolor === true) {
             if (poprawneKoloryKomputera[i] == wynikiKoloryCzlowieka[i]) {
-              wynik_tury += 1;
+              if (poprawneKoloryKomputera[i] !== undefined) {
+                wynik_tury += 1;
+              }
             }
           }
         }
         console.log("Wynik tury", wynik_tury);
 
-        przyciskWynik.innerHTML = `Wynik ${wynik_tury}/${
-          dlugoscGry * lvlTrudnosci
-        }`;
+        if (wyniki.length >= 10) {
+          wyniki = wyniki.slice(0, 9);
+          wynikiPoziomTrudnosci = wynikiPoziomTrudnosci.slice(0, 9);
+          wynikiMaxWynik = wynikiMaxWynik.slice(0, 9);
+        }
+        wyniki.unshift(wynik_tury);
+
+        wynikiPoziomTrudnosci.unshift(poziomTrudnosci);
+
+        wynikiMaxWynik.unshift(liczbaPoprawnychOdpowiedzi);
+
+        //let historiaWynikow = "";
+
+        //Ustawianie local storage
+        let historiaPT0 = localStorage.getItem("historiaPoziomTrudnosci0");
+        let historiaPT1 = localStorage.getItem("historiaPoziomTrudnosci1");
+        let historiaPT2 = localStorage.getItem("historiaPoziomTrudnosci2");
+        let historiaPT3 = localStorage.getItem("historiaPoziomTrudnosci3");
+        let historiaPT4 = localStorage.getItem("historiaPoziomTrudnosci4");
+
+        localStorage.setItem("historiaPoziomTrudnosci0", poziomTrudnosci);
+        localStorage.setItem("historiaPoziomTrudnosci1", historiaPT0);
+        localStorage.setItem("historiaPoziomTrudnosci2", historiaPT1);
+        localStorage.setItem("historiaPoziomTrudnosci3", historiaPT2);
+        localStorage.setItem("historiaPoziomTrudnosci4", historiaPT3);
+
+        let historiaW0 = localStorage.getItem("historiaWynik0");
+        let historiaW1 = localStorage.getItem("historiaWynik1");
+        let historiaW2 = localStorage.getItem("historiaWynik2");
+        let historiaW3 = localStorage.getItem("historiaWynik3");
+        let historiaW4 = localStorage.getItem("historiaWynik4");
+
+        localStorage.setItem("historiaWynik0", wynik_tury);
+        localStorage.setItem("historiaWynik1", historiaW0);
+        localStorage.setItem("historiaWynik2", historiaW1);
+        localStorage.setItem("historiaWynik3", historiaW2);
+        localStorage.setItem("historiaWynik4", historiaW3);
+
+        let historiaMaxW0 = localStorage.getItem("historiaMaxWynik0");
+        let historiaMaxW1 = localStorage.getItem("historiaMaxWynik1");
+        let historiaMaxW2 = localStorage.getItem("historiaMaxWynik2");
+        let historiaMaxW3 = localStorage.getItem("historiaMaxWynik3");
+        let historiaMaxW4 = localStorage.getItem("historiaMaxWynik4");
+
+        localStorage.setItem("historiaMaxWynik0", liczbaPoprawnychOdpowiedzi);
+        localStorage.setItem("historiaMaxWynik1", historiaMaxW0);
+        localStorage.setItem("historiaMaxWynik2", historiaMaxW1);
+        localStorage.setItem("historiaMaxWynik3", historiaMaxW2);
+        localStorage.setItem("historiaMaxWynik4", historiaMaxW3);
+
+        let linia2 = "";
+
+        console.log(Number(historiaPT0), Number(historiaPT0) < 9);
+        if (Number(historiaPT0) < 9) {
+          linia2 = `2. Poziom trudności ${historiaPT0}, wynik ${historiaW0}/${historiaMaxW0} <br><br>`;
+        }
+
+        let linia3 = "";
+        if (historiaPT1 < 9) {
+          linia3 = `3. Poziom trudności ${historiaPT1}, wynik ${historiaW1}/${historiaMaxW1} <br><br>`;
+        }
+
+        let linia4 = "";
+        if (historiaPT2 < 9) {
+          linia4 = `4. Poziom trudności ${historiaPT2}, wynik ${historiaW2}/${historiaMaxW2} <br><br>`;
+        }
+
+        let linia5 = "";
+        if (historiaPT3 < 9) {
+          linia5 = `5. Poziom trudności ${historiaPT3}, wynik ${historiaW3}/${historiaMaxW3} <br><br>`;
+        }
+
+        historiaWynikow = `
+        1. Poziom trudności ${poziomTrudnosci}, wynik ${wynik_tury}/${liczbaPoprawnychOdpowiedzi} <br><br>
+        ${linia2}
+        ${linia3}
+        ${linia4}
+        ${linia5}
+        `;
+
+        ostatnieWyniki.innerHTML = historiaWynikow;
+
+        przyciskWynik.innerHTML = `Wynik ${wynik_tury}/${liczbaPoprawnychOdpowiedzi}`;
         zmianaPoziomuTrudnosci();
       }, 1000);
     }
@@ -437,33 +623,36 @@ const modalCloseAll = document.querySelectorAll(".modal-close");
 
 const modalMistrz = document.querySelector(".modalmistrz");
 const modalmZasady = document.querySelector(".modalzasady");
+const modalWyniki = document.querySelector(".modalwyniki");
 const modalUstawienia = document.querySelector(".modalustawienia");
 
 const modalBgMistrz = document.querySelector(".modal-bg-mistrz");
 const modalBgZasady = document.querySelector(".modal-bg-zasady");
+const modalBgWyniki = document.querySelector(".modal-bg-wyniki");
 const modalBgUstawienia = document.querySelector(".modal-bg-ustawienia");
 
-btnmodalAll.forEach((btnmodal) => {
-  btnmodal.addEventListener("click", () => {
-    modalBg.classList.add("modal-bg-active");
-  });
-});
-
+//Zamkniecie modala
 modalCloseAll.forEach((modalClose) => {
   modalClose.addEventListener("click", () => {
     modalBg.classList.remove("modal-bg-active");
     modalBgMistrz.classList.remove("modal-bg-active");
     modalBgZasady.classList.remove("modal-bg-active");
+    modalBgWyniki.classList.remove("modal-bg-active");
     modalBgUstawienia.classList.remove("modal-bg-active");
   });
 });
 
+//Otwarcie modala
 modalMistrz.addEventListener("click", () => {
   modalBgMistrz.classList.add("modal-bg-active");
 });
 
 modalmZasady.addEventListener("click", () => {
   modalBgZasady.classList.add("modal-bg-active");
+});
+
+modalWyniki.addEventListener("click", () => {
+  modalBgWyniki.classList.add("modal-bg-active");
 });
 
 modalUstawienia.addEventListener("click", () => {
@@ -534,6 +723,8 @@ const zmianaNaBialeTlo = () => {
 
   modalBgZasady.classList.add("modal-bg-zasady-white");
 
+  modalBgWyniki.classList.add("modal-bg-wyniki-white");
+
   modalBgUstawienia.classList.add("modal-bg-ustawienia-white");
 };
 
@@ -581,6 +772,7 @@ inputKolorTla.addEventListener("change", (e) => {
 
 //local Storage
 window.addEventListener("DOMContentLoaded", () => {
+  console.log(localStorage);
   if (localStorage.getItem("tloBiale") == "1") {
     zmianaNaBialeTlo();
   }

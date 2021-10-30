@@ -166,6 +166,7 @@ body {
 .modal-bg,
 .modal-bg-mistrz,
 .modal-bg-zasady,
+.modal-bg-wyniki,
 .modal-bg-ustawienia {
   position: fixed;
   width: 100%;
@@ -182,6 +183,7 @@ body {
 
 .modal-bg-mistrz-white,
 .modal-bg-zasady-white,
+.modal-bg-wyniki-white,
 .modal-bg-ustawienia-white {
   background: rgba(0, 0, 0, 0.5);
 }
