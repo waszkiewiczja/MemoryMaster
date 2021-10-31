@@ -2,6 +2,9 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: rgb(24, 24, 24);
+  max-height: 100vh;
+  overflow: hidden;
 }
 
 .main {
@@ -9,10 +12,11 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  min-height: 100vh;
+  min-height: 88vh;
   margin: 0;
   background-color: rgb(24, 24, 24);
   caret-color: transparent;
+  margin-top: 2rem;
 }
 
 .header {
@@ -47,7 +51,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   max-width: 18rem;
-  margin-bottom: 5rem;
+
+  justify-content: center;
 }
 
 .pole {
@@ -197,7 +202,7 @@ body {
   position: relative;
   background: rgb(17, 17, 17);
   max-width: 40rem;
-  max-height: 40%;
+  max-height: 50%;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
@@ -255,4 +260,228 @@ input[type="checkbox"] {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgb(153, 137, 110);
+}
+
+/* // */
+/* Hamburger menu */
+.menuGlowne {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: rgb(24, 24, 24);
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  color: rgb(110, 115, 121);
+  font-size: 2rem;
+  padding-top: 2rem;
+  caret-color: transparent;
+  max-height: 10vh;
+}
+
+.menuGlowne a {
+  color: rgb(110, 115, 121);
+  text-decoration: none;
+}
+.menuGlowne a:hover {
+  color: aliceblue;
+  text-decoration: none;
+}
+
+.lewyPrzycisk {
+  flex: 1;
+  background: rgb(24, 24, 24);
+  cursor: pointer;
+}
+
+.srodkowyPrzycisk1 {
+  flex: 1;
+  background: rgb(24, 24, 24);
+  cursor: pointer;
+}
+
+.srodkowyPrzycisk2 {
+  flex: 1;
+  background: rgb(24, 24, 24);
+  cursor: pointer;
+}
+
+.prawyPrzycisk {
+  flex: 1;
+  background: rgb(24, 24, 24);
+  cursor: pointer;
+}
+
+.przyciskMobileMenu {
+  display: none;
+}
+
+.lewyPrzycisk:hover,
+.srodkowyPrzycisk1:hover,
+.srodkowyPrzycisk2:hover,
+.prawyPrzycisk:hover {
+  color: aliceblue;
+}
+
+.logoMobileMenu {
+  padding-left: 5%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  text-align: left;
+  cursor: pointer;
+}
+
+.logoMobileMenu:hover {
+  color: aliceblue;
+}
+
+.przycisk3linieOrazX {
+  cursor: pointer;
+}
+
+.przycisk3linieOrazX div {
+  width: 2em;
+  height: 0.2em;
+  background-color: rgb(110, 115, 121);
+  margin: 0.4em;
+}
+
+/* Gdy szerokość ekranu jest mniejsza niż 800. Co robić: */
+@media only screen and (max-width: 800px) {
+  .menuGlowne {
+    background: rgb(24, 24, 24);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: start; /* Musimu użyć align-items:start; bo to przesuwa text do lewej gdy tekst nie przekracza jednej linii. 
+    Dla porównania text-align:left działa dla linijek w których tekst przekracza minimum jedną linię, ale nie działa
+    na tekst krótszy niż jedna linia. Więc by mieć efekt który działa jednocześnie dla tekstu dłuższego niż jedna linia 
+    i tekstu krótszego niż jedna linia musimy użyć obu text-align i align-items. */
+    max-height: 100%;
+  }
+
+  .bodyoverflow {
+    overflow: hidden;
+  }
+
+  .menuGlowneMobile {
+    height: 100vh;
+    align-content: flex-start;
+  }
+
+  .przyciskMobileMenu {
+    display: flex;
+    justify-self: center;
+  }
+
+  .przycisk3linieOrazX {
+    display: block;
+    justify-self: center;
+    background: rgb(24, 24, 24);
+  }
+
+  .lewyPrzycisk {
+    display: none;
+  }
+
+  .lewyPrzyciskWidocznosc {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .srodkowyPrzycisk1 {
+    display: none;
+  }
+
+  .srodkowyPrzycisk1Widocznosc {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .srodkowyPrzycisk2 {
+    display: none;
+  }
+
+  .srodkowyPrzycisk2Widocznosc {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .prawyPrzycisk {
+    display: none;
+  }
+
+  .prawyPrzyciskWidocznosc {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .zmiana3liniiNaX .linia1 {
+    transform: rotate(-45deg) translate(-17px, 8px);
+  }
+  .zmiana3liniiNaX .linia2 {
+    opacity: 0;
+  }
+  .zmiana3liniiNaX .linia3 {
+    transform: rotate(45deg) translate(-17px, -8px);
+  }
+
+  .zmiana3liniiNaX:hover {
+    cursor: pointer;
+  }
+
+  .main {
+    margin-top: 1rem;
+  }
+
+  .pole {
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+  }
+}
+
+/* 
+
+
+odstęp
+*/
+.testSrodkaStrony {
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+
+.lewy {
+  flex: 1;
+  background: crimson;
+}
+
+.srodek {
+  flex: 1;
+  background: blue;
+}
+
+.prawy {
+  flex: 1;
+  background: cyan;
 }

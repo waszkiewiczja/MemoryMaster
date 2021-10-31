@@ -621,6 +621,11 @@ const btnmodalAll = document.querySelectorAll(".btnmodal");
 const modalBg = document.querySelector(".modal-bg");
 const modalCloseAll = document.querySelectorAll(".modal-close");
 
+const modalLewy = document.querySelector("#lewyPrzycisk");
+const modalSrodkowyPrzycisk1 = document.querySelector("#srodkowyPrzycisk1");
+const modalSrodkowyPrzycisk2 = document.querySelector("#srodkowyPrzycisk2");
+const modalPrawy = document.querySelector("#prawyPrzycisk");
+
 const modalMistrz = document.querySelector(".modalmistrz");
 const modalmZasady = document.querySelector(".modalzasady");
 const modalWyniki = document.querySelector(".modalwyniki");
@@ -639,24 +644,47 @@ modalCloseAll.forEach((modalClose) => {
     modalBgZasady.classList.remove("modal-bg-active");
     modalBgWyniki.classList.remove("modal-bg-active");
     modalBgUstawienia.classList.remove("modal-bg-active");
+
+    przyciskStart.style.border = "1px solid wheat";
+    przyciskWynik.style.border = "1px solid wheat";
   });
 });
 
 //Otwarcie modala
-modalMistrz.addEventListener("click", () => {
+// modalMistrz.addEventListener("click", () => {
+//   modalBgMistrz.classList.add("modal-bg-active");
+// });
+modalLewy.addEventListener("click", () => {
   modalBgMistrz.classList.add("modal-bg-active");
+  przyciskStart.style.border = "1px solid black";
+  przyciskWynik.style.border = "1px solid black";
 });
 
-modalmZasady.addEventListener("click", () => {
+// modalmZasady.addEventListener("click", () => {
+//   modalBgZasady.classList.add("modal-bg-active");
+// });
+modalSrodkowyPrzycisk1.addEventListener("click", () => {
   modalBgZasady.classList.add("modal-bg-active");
+  przyciskStart.style.border = "1px solid black";
+  przyciskWynik.style.border = "1px solid black";
 });
 
-modalWyniki.addEventListener("click", () => {
+// modalWyniki.addEventListener("click", () => {
+//   modalBgWyniki.classList.add("modal-bg-active");
+// });
+modalSrodkowyPrzycisk2.addEventListener("click", () => {
   modalBgWyniki.classList.add("modal-bg-active");
+  przyciskStart.style.border = "1px solid black";
+  przyciskWynik.style.border = "1px solid black";
 });
 
-modalUstawienia.addEventListener("click", () => {
+// modalUstawienia.addEventListener("click", () => {
+//   modalBgUstawienia.classList.add("modal-bg-active");
+// });
+modalPrawy.addEventListener("click", () => {
   modalBgUstawienia.classList.add("modal-bg-active");
+  przyciskStart.style.border = "1px solid black";
+  przyciskWynik.style.border = "1px solid black";
 });
 
 //Odczytanie poziom trudności z ustawień
@@ -776,4 +804,41 @@ window.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("tloBiale") == "1") {
     zmianaNaBialeTlo();
   }
+});
+
+//hamburger
+const body = document.querySelector("body");
+const menuGlowne = document.querySelector(".menuGlowne");
+
+const przycisk3linieOrazX = document.querySelector(".przycisk3linieOrazX");
+const linia1 = document.querySelector(".linia1");
+const linia2 = document.querySelector(".linia2");
+const linia3 = document.querySelector(".linia3");
+
+const lewyPrzycisk = document.querySelector(".lewyPrzycisk");
+const srodkowyPrzycisk1 = document.querySelector(".srodkowyPrzycisk1");
+const srodkowyPrzycisk2 = document.querySelector(".srodkowyPrzycisk2");
+const prawyPrzycisk = document.querySelector(".prawyPrzycisk");
+
+przycisk3linieOrazX.addEventListener("click", () => {
+  przycisk3linieOrazX.classList.toggle("zmiana3liniiNaX");
+  body.classList.toggle("bodyoverflow");
+  menuGlowne.classList.toggle("menuGlowneMobile");
+
+  lewyPrzycisk.classList.toggle("lewyPrzyciskWidocznosc");
+  srodkowyPrzycisk1.classList.toggle("srodkowyPrzycisk1Widocznosc");
+  srodkowyPrzycisk2.classList.toggle("srodkowyPrzycisk2Widocznosc");
+  prawyPrzycisk.classList.toggle("prawyPrzyciskWidocznosc");
+});
+
+przycisk3linieOrazX.addEventListener("mouseenter", () => {
+  linia1.style.backgroundColor = "red";
+  linia2.style.backgroundColor = "red";
+  linia3.style.backgroundColor = "red";
+});
+
+przycisk3linieOrazX.addEventListener("mouseleave", () => {
+  linia1.style.backgroundColor = "rgb(110, 115, 121)";
+  linia2.style.backgroundColor = "rgb(110, 115, 121)";
+  linia3.style.backgroundColor = "rgb(110, 115, 121)";
 });
