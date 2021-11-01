@@ -4,7 +4,7 @@ body {
   box-sizing: border-box;
   background-color: rgb(24, 24, 24);
   max-height: 100vh;
-  overflow: hidden;
+
 }
 
 .main {
@@ -38,7 +38,9 @@ body {
   color: aliceblue;
 }
 
-
+.navwhite:hover {
+  color: rgb(17, 17, 17);
+}
 
 .mozgimg {
   width: 2rem;
@@ -334,22 +336,6 @@ input[type="checkbox"] {
   color: aliceblue;
 }
 
-.lewyPrzyciskWhite,
-.srodkowyPrzycisk1White,
-.srodkowyPrzycisk2White,
-.prawyPrzyciskWhite {
-
-  background:rgb(235,235,235)
-}
-
-.lewyPrzyciskWhite:hover,
-.srodkowyPrzycisk1White:hover,
-.srodkowyPrzycisk2White:hover,
-.prawyPrzyciskWhite:hover {
-  color: rgb(17, 17, 17);
-
-}
-
 .logoMobileMenu {
   padding-left: 5%;
   display: flex;
@@ -366,10 +352,6 @@ input[type="checkbox"] {
 
 .przycisk3linieOrazX {
   cursor: pointer;
-}
-
-.przycisk3linieOrazXWhite {
-  background:rgb(235,235,235)
 }
 
 .przycisk3linieOrazX div {
@@ -434,14 +416,12 @@ input[type="checkbox"] {
   }
 
   .przycisk3linieOrazXCzerwony {
-    border: 2px solid rgb(228, 57, 41); 
+    border: 1px solid rgb(228, 57, 41); 
   }
 
   .mobileWidocznosc {
     display: flex;
   }
-
-
 
   .lewyPrzycisk {
     display: none;
@@ -503,10 +483,6 @@ input[type="checkbox"] {
     font-size: 1.5rem;
   }
 
-  .mobileWidocznoscWhite {
-    background:rgb(235,235,235)
-  }
-
   .zmiana3liniiNaX .linia1 {
     transform: rotate(-45deg) translate(-11px, 8px);
   }
@@ -561,7 +537,7 @@ input[type="checkbox"] {
 
   .logo2Widocznosc {
     display: block;
-    border:3px solid wheat;
+    border: 1px solid wheat;
     padding: 0.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
