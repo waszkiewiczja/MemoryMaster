@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mistrz Pamięci - Darmowa gra online</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <!-- Menu Glowne -->
+      <div class="menuGlowne">
+        <div class="przyciskMobileMenu">
+          <div class="przycisk3linieOrazX" id="przycisk3linieOrazX">
+            <div class="linia1"></div>
+            <div class="linia2"></div>
+            <div class="linia3"></div>
+          </div>
+          <!-- <div class="logoMobileMenu">mistrzpamieci.pl</div> -->
+          <div class="logoMobileMenu">
+            <div class="logo1">
+              <a href="https://waszkiewiczja.github.io/MemoryMaster/">
+                <img
+                  src="https://waszkiewiczja.github.io/MemoryMaster/wyniki/mozg3.png"
+                  style="width: 2.5rem"
+                  id="imglogo"
+              /></a>
+            </div>
+            <div class="logo2">
+              <a href="https://waszkiewiczja.github.io/MemoryMaster/">Graj</a>
+            </div>
+          </div>
+        </div>
+        <div class="lewyPrzycisk" id="lewyPrzycisk">Mistrz pamięci</div>
+        <div class="srodkowyPrzycisk1" id="srodkowyPrzycisk1">Zasady gry</div>
+        <div class="srodkowyPrzycisk2" id="srodkowyPrzycisk2">Wyniki</div>
+        <div class="prawyPrzycisk" id="prawyPrzycisk">Ustawienia</div>
+
+        <div class="lewyPrzycisk mobileWidocznosc" id="lewyPrzyciskMobile">
+          <a href="https://waszkiewiczja.github.io/MemoryMaster/mistrz/"> Mistrz pamięci</a>
+        </div>
+        <div
+          class="srodkowyPrzycisk1 mobileWidocznosc"
+          id="srodkowyPrzycisk1Mobile"
+        >
+          <a href="https://waszkiewiczja.github.io/MemoryMaster/zasady/"> Zasady gry</a>
+        </div>
+        <div
+          class="srodkowyPrzycisk2 mobileWidocznosc"
+          id="srodkowyPrzycisk2Mobile"
+        >
+          <a href="https://waszkiewiczja.github.io/MemoryMaster/wyniki/">Wyniki</a>
+        </div>
+        <div class="prawyPrzycisk mobileWidocznosc" id="prawyPrzyciskMobile">
+          <a href="https://waszkiewiczja.github.io/MemoryMaster/ustawienia/">Ustawienia</a>
+        </div>
+      </div>
+    </nav>
+    <!-- Koniec menu glowne -->
+
+    <div class="main">
+      <!-- <div class="header">
+        <div class="nav modalmistrz">Mistrz pamięci</div>
+        <div class="nav modalzasady">Zasady gry</div>
+        <div class="nav modalwyniki">Wyniki</div>
+        <div class="nav modalustawienia">Ustawienia</div>
+      </div> -->
+      <h1 class="mainh1">Wyniki</h1>
+      <p class="opisMobile">Wyniki ostatnich gier:</p>
+      <p class="opisMobile" id="ostatnieWyniki"></p>
+
+      <div class="plansza">
+        <div class="pole" id="0" style="display: none"></div>
+        <div class="pole" id="1" style="display: none"></div>
+        <div class="pole" id="2" style="display: none"></div>
+        <div class="pole" id="3" style="display: none"></div>
+        <div class="pole" id="4" style="display: none"></div>
+        <div class="pole" id="5" style="display: none"></div>
+        <div class="pole" id="6" style="display: none"></div>
+        <div class="pole" id="7" style="display: none"></div>
+        <div class="pole" id="8" style="display: none"></div>
+      </div>
+      <div class="startdiv">
+        <div><button class="start" style="display: none">Start</button></div>
+        <div><button class="wynik" style="display: none">Wynik</button></div>
+        <div>
+          <button class="pozycja" style="display: none">Pozycja</button>
+        </div>
+        <div><button class="litera" style="display: none">Litera</button></div>
+        <div><button class="kolor" style="display: none">Kolor</button></div>
+      </div>
+    </div>
+
+    <!-- <button class="btnmodal">Kliknij tutaj</button> -->
+    <div class="modal-bg">
+      <div class="modal">
+        <h2>Zasady gry</h2>
+        <p>Kliknij tutaj</p>
+
+        <span class="modal-close">X</span>
+      </div>
+    </div>
+
+    <div class="modal-bg-mistrz">
+      <div class="modal">
+        <h1>Mistrz pamięci</h1>
+        <p class="opis">
+          Trening mózgu opiera się na założeniu, że stymulacja umysłowa może
+          poprawić neuroplastyczność. Jest to zdolność mózgu do tworzenia i
+          reorganizacji połączeń między komórkami mózgowymi w odpowiedzi na nowe
+          bodźce i zadania. Badanie Brain Training Game Boosts Executive
+          Functions opublikowane w PLOS One w 2013 r. wykazało, że osoby, które
+          angażowały się w gry treningowe mózgu, wykazywały poprawę szybkości
+          przetwarzania informacji, pamięci i funkcji wykonawczych.<br /><br />
+          Mistrz Pamięci to gra, która intensywanie symuluje pamięć
+          krótkotrwałą, poprawia skupienie i koncentrację.<br /><br />
+          Polega na zapamiętaniu pojawiających się liter i pozycji na planszy
+          oraz w wersji rozszerzonej również kolorów liter/ Wraz ze wzrostem
+          trudności musimy zapamiętywać coraz większe ilości informacji.<br /><br />
+          Gra wymaga od nas jednoczesnego zapamiętywania informacji jak i
+          wykorzystywania informacji już zapamiętanych mocno stymulując pracę
+          mózgu.
+        </p>
+
+        <span class="modal-close">X</span>
+      </div>
+    </div>
+
+    <div class="modal-bg-zasady">
+      <div class="modal">
+        <h1>Zasady gry</h1>
+        <p class="opis">
+          Zapamiętaj pojawiającą się literę i pole na której się pojawiła.
+          Litera i pole są niepowiązane i niezależne.<br /><br />
+          Jeżeli dwie tury poźniej na tym samym lub dowolnym innym polu pojawiła
+          się <b>ta sama litera kliknij przycisk "Litera"</b>. Jeżeli dwie tury
+          później ta sama lub inna litera pojawiła się w
+          <b>tym samym polu kliknij przycisk "Pozycja"</b>. Jeżeli zgadza się
+          zarówno litera jak i pozycji to kliknij oba przyciski.<br /><br />
+          Jeżeli litera nie zgadza się z literą sprzed dwóch tur to nic nie
+          klikasz. Jeżeli pole nie zgadza się z polem sprzed dwóch tur to nic
+          nie klikasz.<br /><br />
+          Domyślnie ustawiony jest poziom trudności 2, co oznacza, że musisz
+          wskazać literę i pole, które pojawiło się dwie tury temu.
+          Automatycznie awansujesz poziom wyżej gdzy udzielisz 90% poprawnych
+          odpowiedzi. Automatycznie spadniesz poziom niżej, gdy nie udzielisz
+          żadnej poprawnej odpowiedzi.<br /><br />
+          W ustawieniach możesz ręcznie zmienić poziom trudności. Poziom
+          Trudności 3 oznacza, że musisz zapamiętać literę i pole, które
+          pojawiło się trzy tury temu. <br /><br />
+        </p>
+        <h1>Szczegółowe wytłumaczenie</h1>
+        <p class="opis">
+          Poziom trudności 2 (domyślny).<br /><br />
+          W turze 1 pojawi się losowa litera na losowym polu. Zapamiętaj literę
+          i pozycję. <br /><br />
+          W turze 2 pojawi się losowa litera na losowym polu. Zapamiętaj literę
+          i pozycję.<br /><br />
+          W turze 3 pojawi się losowa litera na losowym polu. Zapamiętaj literę
+          i pozycję. Jeżeli litera z tej tury odpowiada literze z tury 1 to
+          kliknij przycisk "Litera". Jeżeli pozycja z tej tury odpowiada pozycji
+          z tury 1 to kliknij przycisk "Pozycja".<br /><br />
+          W turze 4 pojawi się losowa litera na losowym polu. Zapamiętaj literę
+          i pozycję. Jeżeli litera z tej tury odpowiada literze z tury 2 to
+          kliknij przycisk "Litera". Jeżeli pozycja z tej tury odpowiada pozycji
+          z tury 2 to kliknij przycisk "Pozycja". <br /><br />
+          W turze 5 pojawi się losowa litera na losowym polu. Zapamiętaj literę
+          i pozycję. Jeżeli litera z tej tury odpowiada literze z tury 3 to
+          kliknij przycisk "Litera". Jeżeli pozycja z tej tury odpowiada pozycji
+          z tury 3 to kliknij przycisk "Pozycja". <br /><br />
+        </p>
+
+        <span class="modal-close">X</span>
+      </div>
+    </div>
+
+    <div class="modal-bg-wyniki">
+      <div class="modal">
+        <h1>Wyniki</h1>
+        <p class="opis">Wyniki ostatnich gier:</p>
+        <p class="opis" id="ostatnieWyniki"></p>
+
+        <span class="modal-close">X</span>
+      </div>
+    </div>
+
+    <div class="modal-bg-ustawienia">
+      <div class="modal">
+        <h1>Ustawienia</h1>
+        <p class="opis">
+          Poziom trudności
+          <input
+            type="number"
+            value="2"
+            id="inputPoziomTrudnosci"
+          /><br /><br />
+
+          Kolor tła biały <input type="checkbox" id="inputKolorTla" />
+          <br /><br />
+          Kolory liter
+          <input type="checkbox" id="inputKoloryLiter" /><br /><br />
+          <!-- Kształty pól
+          <input type="checkbox" id="inputKsztaltyPol" /> -->
+        </p>
+
+        <span class="modal-close">X</span>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/underscore@1.13.1/underscore-umd-min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
