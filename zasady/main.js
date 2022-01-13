@@ -82,6 +82,12 @@ ostatnieWyniki.innerHTML = historiaWynikow;
 //
 //
 // Modal popup
+const body = document.querySelector("body");
+const main = document.querySelector(".main");
+const menuGlowne = document.querySelector(".menuGlowne");
+const przycisk3linieOrazX = document.querySelector("#przycisk3linieOrazX");
+const imglogo = document.querySelector("#imglogo");
+
 const btnmodalAll = document.querySelectorAll(".btnmodal");
 const modalBg = document.querySelector(".modal-bg");
 const modalCloseAll = document.querySelectorAll(".modal-close");
@@ -101,6 +107,20 @@ const modalBgZasady = document.querySelector(".modal-bg-zasady");
 const modalBgWyniki = document.querySelector(".modal-bg-wyniki");
 const modalBgUstawienia = document.querySelector(".modal-bg-ustawienia");
 
+const lewyPrzyciskMobile = document.querySelector("#lewyPrzyciskMobile");
+const srodkowyPrzycisk1Mobile = document.querySelector(
+  "#srodkowyPrzycisk1Mobile"
+);
+const srodkowyPrzycisk2Mobile = document.querySelector(
+  "#srodkowyPrzycisk2Mobile"
+);
+const prawyPrzyciskMobile = document.querySelector("#prawyPrzyciskMobile");
+
+const lewyPrzycisk = document.querySelector(".lewyPrzycisk");
+const srodkowyPrzycisk1 = document.querySelector(".srodkowyPrzycisk1");
+const srodkowyPrzycisk2 = document.querySelector(".srodkowyPrzycisk2");
+const prawyPrzycisk = document.querySelector(".prawyPrzycisk");
+
 //Zamkniecie modala
 modalCloseAll.forEach((modalClose) => {
   modalClose.addEventListener("click", () => {
@@ -116,36 +136,24 @@ modalCloseAll.forEach((modalClose) => {
 });
 
 //Otwarcie modala
-// modalMistrz.addEventListener("click", () => {
-//   modalBgMistrz.classList.add("modal-bg-active");
-// });
 modalLewy.addEventListener("click", () => {
   modalBgMistrz.classList.add("modal-bg-active");
   przyciskStart.style.border = "1px solid black";
   przyciskWynik.style.border = "1px solid black";
 });
 
-// modalmZasady.addEventListener("click", () => {
-//   modalBgZasady.classList.add("modal-bg-active");
-// });
 modalSrodkowyPrzycisk1.addEventListener("click", () => {
   modalBgZasady.classList.add("modal-bg-active");
   przyciskStart.style.border = "1px solid black";
   przyciskWynik.style.border = "1px solid black";
 });
 
-// modalWyniki.addEventListener("click", () => {
-//   modalBgWyniki.classList.add("modal-bg-active");
-// });
 modalSrodkowyPrzycisk2.addEventListener("click", () => {
   modalBgWyniki.classList.add("modal-bg-active");
   przyciskStart.style.border = "1px solid black";
   przyciskWynik.style.border = "1px solid black";
 });
 
-// modalUstawienia.addEventListener("click", () => {
-//   modalBgUstawienia.classList.add("modal-bg-active");
-// });
 modalPrawy.addEventListener("click", () => {
   modalBgUstawienia.classList.add("modal-bg-active");
   przyciskStart.style.border = "1px solid black";
@@ -153,7 +161,6 @@ modalPrawy.addEventListener("click", () => {
 });
 
 //Odczytanie poziom trudności z ustawień
-
 inputPoziomTrudnosci.addEventListener("change", () => {
   poziomTrudnosci = Number(inputPoziomTrudnosci.value);
   if (poziomTrudnosci > 8) {
@@ -171,19 +178,35 @@ const inputKoloryLiter = document.querySelector("#inputKoloryLiter");
 inputKoloryLiter.addEventListener("change", (e) => {
   if (inputKoloryLiter.checked) {
     poziomKoloryAktywny = true;
+    inputKoloryLiter.checked = true;
     localStorage.setItem("aktywneKolory", "1");
   }
 
   if (!inputKoloryLiter.checked) {
     poziomKoloryAktywny = false;
+    inputKoloryLiter.checked = false;
     localStorage.setItem("aktywneKolory", "0");
   }
 });
 
 //Funkcja zmiany tla
 const zmianaNaBialeTlo = () => {
-  const divmain = document.querySelector(".main");
-  divmain.style = "background:rgb(235,235,235)";
+  body.style = "background:rgb(235,235,235)";
+  main.style = "background:rgb(235,235,235)";
+  menuGlowne.style = "background:rgb(235,235,235)";
+
+  lewyPrzycisk.classList.add("prawyPrzyciskWhite");
+  srodkowyPrzycisk1.classList.add("prawyPrzyciskWhite");
+  srodkowyPrzycisk2.classList.add("prawyPrzyciskWhite");
+  prawyPrzycisk.classList.add("prawyPrzyciskWhite");
+
+  lewyPrzyciskMobile.classList.add("mobileWidocznoscWhite");
+  srodkowyPrzycisk1Mobile.classList.add("mobileWidocznoscWhite");
+  srodkowyPrzycisk2Mobile.classList.add("mobileWidocznoscWhite");
+  prawyPrzyciskMobile.classList.add("mobileWidocznoscWhite");
+
+  przycisk3linieOrazX.style.background = "rgb(235,235,235)";
+  imglogo.src = "/mozg.png";
 
   const divNavAll = document.querySelectorAll(".nav");
   divNavAll.forEach((nav) => {
@@ -224,17 +247,33 @@ const zmianaNaBialeTlo = () => {
 //Odczytanie tla z ustawień
 const inputKolorTla = document.querySelector("#inputKolorTla");
 
+//Włączenie białego tła
 inputKolorTla.addEventListener("change", (e) => {
   if (inputKolorTla.checked) {
     localStorage.setItem("tloBiale", "1");
     zmianaNaBialeTlo();
   }
+  //Wyłączenie białego tła
   if (!inputKolorTla.checked) {
     inputKolorTla.checked = false;
     localStorage.setItem("tloBiale", "0");
 
-    const divmain = document.querySelector(".main");
-    divmain.style = "background:rgb(24, 24, 24);";
+    body.style = "background:rgb(24, 24, 24)";
+    main.style = "background:rgb(24, 24, 24)";
+    menuGlowne.style = "background:rgb(24, 24, 24)";
+
+    przycisk3linieOrazX.style.background = "rgb(24, 24, 24)";
+    imglogo.src = "http://jedrek90.47.pl/mistrzpamieci/mozg3.png";
+
+    lewyPrzycisk.classList.remove("prawyPrzyciskWhite");
+    srodkowyPrzycisk1.classList.remove("prawyPrzyciskWhite");
+    srodkowyPrzycisk2.classList.remove("prawyPrzyciskWhite");
+    prawyPrzycisk.classList.remove("prawyPrzyciskWhite");
+
+    lewyPrzyciskMobile.classList.remove("mobileWidocznoscWhite");
+    srodkowyPrzycisk1Mobile.classList.remove("mobileWidocznoscWhite");
+    srodkowyPrzycisk2Mobile.classList.remove("mobileWidocznoscWhite");
+    prawyPrzyciskMobile.classList.remove("mobileWidocznoscWhite");
 
     const divNavAll = document.querySelectorAll(".nav");
     divNavAll.forEach((nav) => {
@@ -269,28 +308,17 @@ window.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("tloBiale") == "1") {
     zmianaNaBialeTlo();
   }
+  if (localStorage.getItem("aktywneKolory") == "1") {
+    inputKoloryLiter.checked = true;
+  }
 });
 
-//hamburger
-const body = document.querySelector("body");
-const main = document.querySelector(".main");
-const menuGlowne = document.querySelector(".menuGlowne");
-
-const przycisk3linieOrazX = document.querySelector(".przycisk3linieOrazX");
+//Hamburger menu
 const linia1 = document.querySelector(".linia1");
 const linia2 = document.querySelector(".linia2");
 const linia3 = document.querySelector(".linia3");
 const logo1 = document.querySelector(".logo1");
 const logo2 = document.querySelector(".logo2");
-
-const lewyPrzyciskMobile = document.querySelector("#lewyPrzyciskMobile");
-const srodkowyPrzycisk1Mobile = document.querySelector(
-  "#srodkowyPrzycisk1Mobile"
-);
-const srodkowyPrzycisk2Mobile = document.querySelector(
-  "#srodkowyPrzycisk2Mobile"
-);
-const prawyPrzyciskMobile = document.querySelector("#prawyPrzyciskMobile");
 
 przycisk3linieOrazX.addEventListener("click", () => {
   przycisk3linieOrazX.classList.toggle("zmiana3liniiNaX");
@@ -301,8 +329,6 @@ przycisk3linieOrazX.addEventListener("click", () => {
   przycisk3linieOrazX.classList.toggle("przycisk3linieOrazXCzerwony");
   logo1.classList.toggle("logo1Widocznosc");
   logo2.classList.toggle("logo2Widocznosc");
-
-  lewyPrzyciskMobile.classList.toggle("mobileWidocznosc");
 
   lewyPrzyciskMobile.classList.toggle("lewyPrzyciskWidocznosc");
   srodkowyPrzycisk1Mobile.classList.toggle("srodkowyPrzycisk1Widocznosc");
