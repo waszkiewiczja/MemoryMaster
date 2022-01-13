@@ -1,0 +1,573 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: rgb(24, 24, 24);
+  max-height: 100vh;
+
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 88vh;
+  margin: 0;
+  background-color: rgb(24, 24, 24);
+  caret-color: transparent;
+  margin-top: 2rem;
+}
+
+.header {
+  color: rgb(110, 115, 121);
+  font-size: 2rem;
+  display: flex;
+}
+
+.tresc {
+  background-color: rgb(24, 24, 24);
+}
+
+.nav {
+  margin: 2rem;
+  caret-color: transparent;
+}
+
+.nav:hover {
+  color: aliceblue;
+}
+
+
+
+.mozgimg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.plansza {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 18rem;
+
+  justify-content: center;
+}
+
+.pole {
+  background-color: #2f2f2f;
+  width: 5rem;
+  height: 5rem;
+  line-height: 5rem;
+  margin: 0.5rem;
+  text-align: center;
+  font-size: 2rem;
+  color: aliceblue;
+  caret-color: transparent;
+}
+
+.polewhite {
+  background: rgb(200, 200, 200);
+  color: #2f2f2f;
+}
+
+.startdiv {
+  display: flex;
+  text-align: center;
+}
+
+.start {
+  background-color: rgb(57, 61, 65);
+  color: rgb(217, 223, 228);
+  font-size: 1.3rem;
+  line-height: 1rem;
+  padding: 1.4rem;
+  margin: 1rem;
+  caret-color: transparent;
+  border: 1px solid wheat;
+  cursor: pointer;
+}
+
+.wynik {
+  background-color: rgb(57, 61, 65);
+  color: rgb(217, 223, 228);
+  font-size: 1.3rem;
+  line-height: 1rem;
+  padding: 1.4rem;
+  margin: 1rem;
+  caret-color: transparent;
+  border: 1px solid wheat;
+  display: none;
+}
+
+.pozycja {
+  background-color: rgb(57, 61, 65);
+  color: rgb(217, 223, 228);
+  font-size: 1.3rem;
+  line-height: 1rem;
+  padding: 1.4rem;
+  margin: 1rem;
+  caret-color: transparent;
+  display: none;
+  border: 1px solid rgb(153, 137, 110);
+  cursor: pointer;
+}
+
+.litera {
+  background-color: rgb(57, 61, 65);
+  color: rgb(217, 223, 228);
+  font-size: 1.3rem;
+  line-height: 1rem;
+  padding: 1.4rem;
+  margin: 1rem;
+  caret-color: transparent;
+  display: none;
+  border: 1px solid rgb(153, 137, 110);
+  cursor: pointer;
+}
+
+.kolor {
+  background-color: rgb(57, 61, 65);
+  color: rgb(217, 223, 228);
+  font-size: 1.3rem;
+  line-height: 1rem;
+  padding: 1.4rem;
+  margin: 1rem;
+  caret-color: transparent;
+  display: none;
+  border: 1px solid rgb(153, 137, 110);
+  cursor: pointer;
+}
+
+.start:active,
+.pozycja:active,
+.litera:active,
+.kolor:active {
+  background-color: rgb(47, 41, 15);
+}
+
+.startwhite,
+.wynikwhite,
+.pozycjawhite,
+.literawhite,
+.kolorwhite {
+  background-color: rgb(200, 200, 200);
+  color: #2f2f2f;
+  border: 1px solid wheat;
+}
+
+.startwhite:active,
+.pozycjawhite:active,
+.literawhite:active,
+.kolorwhite:active {
+  background-color: rgb(238, 231, 201);
+}
+
+/* // */
+/* // */
+/* Modal popup */
+
+.modal-bg,
+.modal-bg-mistrz,
+.modal-bg-zasady,
+.modal-bg-wyniki,
+.modal-bg-ustawienia {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s;
+}
+
+.modal-bg-mistrz-white,
+.modal-bg-zasady-white,
+.modal-bg-wyniki-white,
+.modal-bg-ustawienia-white {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-bg-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal {
+  position: relative;
+  background: rgb(17, 17, 17);
+  max-width: 40rem;
+  max-height: 50%;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  opacity: 1;
+  color: rgb(217, 223, 228);
+  padding: 3rem;
+  text-align: justify;
+  overflow-y: auto;
+  border: 1px solid wheat;
+  caret-color: transparent;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 3rem;
+}
+
+.opis {
+  font-size: 1.4rem;
+}
+
+.modal h1 {
+  font-size: 2.5rem;
+}
+
+.main h1 {
+  color: aliceblue;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.opisMobile {
+  color: aliceblue;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+input[type="number"] {
+  width: 8%;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+input[type="checkbox"] {
+  transform: scale(2);
+  margin-left: 1rem;
+}
+
+/* skrol */
+::-webkit-scrollbar {
+  width: 0.8rem;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgb(180, 146, 83);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(153, 137, 110);
+}
+
+/* // */
+/* Hamburger menu */
+.menuGlowne {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: rgb(24, 24, 24);
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  color: rgb(110, 115, 121);
+  font-size: 2rem;
+  padding-top: 2rem;
+  caret-color: transparent;
+  max-height: 10vh;
+}
+
+.menuGlowne a {
+  color: rgb(110, 115, 121);
+  text-decoration: none;
+}
+.menuGlowne a:hover {
+  color: aliceblue;
+  text-decoration: none;
+}
+
+.lewyPrzycisk {
+  flex: 1;
+  background: rgb(24, 24, 24);
+  cursor: pointer;
+}
+
+.srodkowyPrzycisk1 {
+  flex: 1;
+  background: rgb(24, 24, 24);
+  cursor: pointer;
+}
+
+.srodkowyPrzycisk2 {
+  flex: 1;
+  background: rgb(24, 24, 24);
+  cursor: pointer;
+}
+
+.prawyPrzycisk {
+  flex: 1;
+  background: rgb(24, 24, 24);
+  cursor: pointer;
+}
+
+.przyciskMobileMenu {
+  display: none;
+}
+
+.lewyPrzycisk:hover,
+.srodkowyPrzycisk1:hover,
+.srodkowyPrzycisk2:hover,
+.prawyPrzycisk:hover {
+  color: aliceblue;
+}
+
+.lewyPrzyciskWhite,
+.srodkowyPrzycisk1White,
+.srodkowyPrzycisk2White,
+.prawyPrzyciskWhite {
+
+  background:rgb(235,235,235)
+}
+
+.lewyPrzyciskWhite:hover,
+.srodkowyPrzycisk1White:hover,
+.srodkowyPrzycisk2White:hover,
+.prawyPrzyciskWhite:hover {
+  color: rgb(17, 17, 17);
+
+}
+
+.logoMobileMenu {
+  padding-left: 5%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  text-align: left;
+  cursor: pointer;
+}
+
+.logoMobileMenu:hover {
+  color: aliceblue;
+}
+
+.przycisk3linieOrazX {
+  cursor: pointer;
+}
+
+.przycisk3linieOrazXWhite {
+  background:rgb(235,235,235)
+}
+
+.przycisk3linieOrazX div {
+  width: 2em;
+  height: 0.2em;
+  background-color: rgb(110, 115, 121);
+  margin: 0.4em;
+}
+
+.mobileWidocznosc {
+  display: none;
+}
+
+/* Gdy szerokość ekranu jest mniejsza niż 800. Co robić: */
+@media only screen and (max-width: 800px) {
+  .nav {
+    margin: 0;
+  }
+
+  .mainWidocznosc {
+    display: none;
+  }
+
+  .menuGlowne {
+    background: rgb(24, 24, 24);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: start; /* Musimu użyć align-items:start; bo to przesuwa text do lewej gdy tekst nie przekracza jednej linii. 
+    Dla porównania text-align:left działa dla linijek w których tekst przekracza minimum jedną linię, ale nie działa
+    na tekst krótszy niż jedna linia. Więc by mieć efekt który działa jednocześnie dla tekstu dłuższego niż jedna linia 
+    i tekstu krótszego niż jedna linia musimy użyć obu text-align i align-items. */
+    max-height: 100%;
+    padding-top: 0rem;
+    
+  }
+
+  .bodyoverflow {
+    overflow: hidden;
+
+  }
+
+  .menuGlowneMobile {
+    height: 100vh;
+    align-content: flex-start;
+  }
+
+  .przyciskMobileMenu {
+    display: flex;
+    justify-self: center;
+    width: 100%;
+    margin: 0.5rem;
+    
+  }
+
+  .przycisk3linieOrazX {
+    display: block;
+    justify-self: center;
+    background: rgb(24, 24, 24);
+    font-size: 1.5rem;
+    
+  }
+
+  .przycisk3linieOrazXCzerwony {
+    border: 2px solid rgb(228, 57, 41); 
+  }
+
+  .mobileWidocznosc {
+    display: flex;
+  }
+
+
+
+  .lewyPrzycisk {
+    display: none;
+  }
+
+  .lewyPrzyciskWidocznosc {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .srodkowyPrzycisk1  {
+    display: none;
+  }
+
+  .srodkowyPrzycisk1Widocznosc {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .srodkowyPrzycisk2 {
+    display: none;
+  }
+
+  .srodkowyPrzycisk2Widocznosc {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .prawyPrzycisk  {
+    display: none;
+  }
+
+  .prawyPrzyciskWidocznosc {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .mobileWidocznoscWhite {
+    background:rgb(235,235,235)
+  }
+
+  .zmiana3liniiNaX .linia1 {
+    transform: rotate(-45deg) translate(-11px, 8px);
+  }
+  .zmiana3liniiNaX .linia2 {
+    opacity: 0;
+  }
+  .zmiana3liniiNaX .linia3 {
+    transform: rotate(45deg) translate(-11px, -8px);
+  }
+
+  .zmiana3liniiNaX:hover {
+    cursor: pointer;
+  }
+
+  .main {
+    margin-top: 1rem;
+  }
+
+  .pole {
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+  }
+
+  .modal{
+    margin: 1rem;
+  }
+
+  .opis {
+    font-size: 1rem;
+  }
+
+  .modal h1 {
+    font-size: 2rem;
+  }
+
+  .modal-close {
+    font-size: 1.5rem;
+  }
+
+  .logo1 {
+    margin-top: 0.4rem;
+  }
+
+  .logo1Widocznosc {
+    display: none;
+  }
+
+  .logo2 {
+    display: none;
+  }
+
+  .logo2Widocznosc {
+    display: block;
+    border:3px solid wheat;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+}
+
+/* 
+
