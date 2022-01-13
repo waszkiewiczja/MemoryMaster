@@ -751,7 +751,7 @@ const zmianaNaBialeTlo = () => {
   prawyPrzyciskMobile.classList.add("mobileWidocznoscWhite");
 
   przycisk3linieOrazX.style.background = "rgb(235,235,235)";
-  imglogo.src = "http://jedrek90.47.pl/mistrzpamieci/mozg.png";
+  imglogo.src = "/mozg.png";
 
   const divNavAll = document.querySelectorAll(".nav");
   divNavAll.forEach((nav) => {
