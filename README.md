@@ -33,5 +33,7 @@ W turze 4 pojawi się losowa litera na losowym polu. Zapamiętaj literę i pozyc
 
 W turze 5 pojawi się losowa litera na losowym polu. Zapamiętaj literę i pozycję. Jeżeli litera z tej tury odpowiada literze z tury 3 to kliknij przycisk "Litera". Jeżeli pozycja z tej tury odpowiada pozycji z tury 3 to kliknij przycisk "Pozycja".
 
+![alt text](https://github.com/waszkiewiczja/MemoryMaster/blob/main/mp1.png?raw=true)
+
 # Zagraj
 https://waszkiewiczja.github.io/MemoryMaster/
