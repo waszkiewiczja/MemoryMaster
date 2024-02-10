@@ -1,7 +1,7 @@
 # Memory Master
 ![logo](https://github.com/waszkiewiczja/MemoryMaster/assets/80920123/66ad6bc2-f5e7-45ff-9bc8-15e0bea7b55a | width=400)
 
-<img src="https://your-image-url.type](https://github.com/waszkiewiczja/MemoryMaster/assets/80920123/66ad6bc2-f5e7-45ff-9bc8-15e0bea7b55a" width="400">
+<img src="https://github.com/waszkiewiczja/MemoryMaster/assets/80920123/66ad6bc2-f5e7-45ff-9bc8-15e0bea7b55a" width="400">
 
 ## Brain Training Game
 
