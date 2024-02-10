@@ -35,6 +35,7 @@ const PositionButtonComponent: React.FC = () => {
 
     return (
         <button className={buttonClass} onClick={onClickHandler}>
+            {ButtonName.POSITION} {ButtonName.POSITION}
             {ButtonName.POSITION}
         </button>
     );

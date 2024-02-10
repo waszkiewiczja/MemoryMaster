@@ -2,7 +2,7 @@ import { setActivePosition } from '@/store/slicer/GameSlice';
 import { useDispatch } from 'react-redux';
 
 const square =
-    'bg-[#2f2f2f] w-20 h-20 m-2 text-slate-200 flex items-center justify-center text-2xl';
+    'bg-[#2f2f2f] w-20 h-20 m-0 text-slate-200 flex items-center justify-center text-2xl ';
 
 type SquarePropsType = {
     squareId: string;

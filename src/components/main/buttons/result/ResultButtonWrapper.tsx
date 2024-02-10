@@ -35,23 +35,15 @@ export const ResultButtonWrapper: React.FC = () => {
         countCorrectLetterAnswers(correctLettersArray) +
         countCorrectPositionAnswers(correctPositionsArray);
 
-    console.log('result button', userResult, totalCorrectAnswersCount);
-    // useEffect(() => {
-    //     console.log('ile razy');
-    //     if (userResult === 0 || userResult === 1) {
-    //         console.log('minus');
-    //         dispatch(setDifficultyLevel(-1));
-    //     } else if (
-    //         userResult === totalCorrectAnswersCount - 1 ||
-    //         userResult === totalCorrectAnswersCount
-    //     ) {
-    //         console.log('plus');
-    //         dispatch(setDifficultyLevel(1));
-    //     }
-    // });
-
     useEffect(() => {
-        console.log('co do huja pana sie tu dzieje');
+        if (userResult === 0 || userResult === 1) {
+            dispatch(setDifficultyLevel(-1));
+        } else if (
+            userResult === totalCorrectAnswersCount - 1 ||
+            userResult === totalCorrectAnswersCount
+        ) {
+            dispatch(setDifficultyLevel(1));
+        }
     });
 
     return (

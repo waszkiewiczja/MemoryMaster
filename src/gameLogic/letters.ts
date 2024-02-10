@@ -96,7 +96,6 @@ export const handleLetters = ({
         difficultyLevel,
         gameDuration,
     });
-    console.log('lettersArray', lettersArray);
 
     const correctLettersArray: (string | undefined)[] = getCorrectLetterArray({
         lettersArray,

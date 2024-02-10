@@ -12,7 +12,7 @@ export const Board: React.FC = () => {
         (state: RootState) => state.gameSlice.activeLetter
     );
     return (
-        <section className="flex max-w-72 flex-wrap justify-center">
+        <section className="max-w-72 flex flex-wrap justify-center gap-5">
             {squareIds.map((squareId) => {
                 return (
                     <Square

@@ -18,7 +18,7 @@ import {
 import { RootState } from '@/store';
 
 const buttonClass =
-    'bg-[#393D41] text-[#D9DFE4] caret-transparent border border-solid border-orange-200 p-4 m-4 active:bg-yellow-900';
+    'bg-[#393D41] text-slate-300 caret-transparent border border-solid border-orange-200 p-4 m-4 active:bg-yellow-900';
 
 export const StartButton: React.FC = () => {
     const dispatch = useDispatch();
@@ -52,7 +52,6 @@ export const StartButton: React.FC = () => {
             dispatch(setActivePosition(activeSquare));
             dispatch(setActiveLetter(activeLetter));
             dispatch(increaseCurrentRound());
-            console.log('wybuch stop');
 
             if (currentRound >= gameDuration - 1) {
                 clearInterval(interval);
@@ -62,7 +61,6 @@ export const StartButton: React.FC = () => {
     };
 
     const onClickHandler = () => {
-        console.log('wubich start', difficultyLevel, gameDuration);
         const { squaresArray, correctPositionsArray, correctPositionCount } =
             handlePositions({ difficultyLevel, gameDuration });
         const { lettersArray, correctLettersArray, correctLetterCount } =

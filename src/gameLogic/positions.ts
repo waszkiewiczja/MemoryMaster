@@ -65,7 +65,6 @@ export const handlePositions = ({
     difficultyLevel: number;
     gameDuration: number;
 }) => {
-    console.log('tu wchodzi', difficultyLevel, gameDuration);
     const resultIndexes: number[] = getValidatedGeneratedResults({
         difficultyLevel,
         gameDuration,
@@ -76,7 +75,6 @@ export const handlePositions = ({
         gameDuration,
         difficultyLevel,
     });
-    console.log('squaresArray', squaresArray);
 
     const correctPositionsArray: (number | undefined)[] =
         getCorrectPositionArray({

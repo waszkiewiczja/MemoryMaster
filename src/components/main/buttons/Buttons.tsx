@@ -12,7 +12,7 @@ export const Buttons: React.FC = () => {
     );
 
     return (
-        <section className="flex text-center ">
+        <section className="w-full grid max-w-72   ">
             {gameStatus === GameStatus.TO_START ||
             gameStatus === GameStatus.FINISHED ? (
                 <StartButton />
