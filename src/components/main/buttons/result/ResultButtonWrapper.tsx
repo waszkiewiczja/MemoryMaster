@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useStore } from 'react-redux';
 import { RootState } from '@/store';
 import { countCorrectLetterAnswers } from '@/gameLogic/letters';

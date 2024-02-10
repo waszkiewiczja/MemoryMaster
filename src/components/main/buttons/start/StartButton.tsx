@@ -32,7 +32,7 @@ export const StartButton: React.FC = () => {
         (state: RootState) => state.appSlice.gameDuration
     );
 
-    const displayResults = () => {
+    const displayResults = (): void => {
         setTimeout(function () {
             dispatch(setFinishedStatus());
             dispatch(resetCurrentRound());
@@ -45,9 +45,9 @@ export const StartButton: React.FC = () => {
     }: {
         squaresArray: number[];
         lettersArray: string[];
-    }) => {
+    }): void => {
         let currentRound = -1;
-        let interval = setInterval(function () {
+        const interval = setInterval(function () {
             currentRound++;
             const activeSquare = squaresArray[currentRound];
             const activeLetter = lettersArray[currentRound];
@@ -62,7 +62,7 @@ export const StartButton: React.FC = () => {
         }, 2000);
     };
 
-    const onClickHandler = () => {
+    const onClickHandler = (): void => {
         const { squaresArray, correctPositionsArray, correctPositionCount } =
             handlePositions({ difficultyLevel, gameDuration });
         const { lettersArray, correctLettersArray, correctLetterCount } =

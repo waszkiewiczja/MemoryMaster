@@ -20,7 +20,7 @@ const LetterButtonComponent: React.FC = () => {
         useStore<RootState>().getState().gameSlice.userLetterAnswers;
 
     let clicked = false;
-    const onClickHandler = () => {
+    const onClickHandler = (): void => {
         if (activeLetter)
             if (!clicked) {
                 clicked = true;

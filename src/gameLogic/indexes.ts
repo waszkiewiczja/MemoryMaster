@@ -5,7 +5,7 @@ export const generateResultIndexes = ({
     difficultyLevel: number;
     gameDuration: number;
 }): number[] => {
-    let result: number[] = [];
+    const result: number[] = [];
     const validIndex: number = gameDuration - difficultyLevel;
 
     while (result.length < difficultyLevel) {

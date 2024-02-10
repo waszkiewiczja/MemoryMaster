@@ -7,7 +7,7 @@ export const generateResultLetters = ({
     difficultyLevel: number;
     gameDuration: number;
 }): string[] => {
-    let result: string[] = [];
+    const result: string[] = [];
     for (let i = 0; i < gameDuration; i++) {
         result.push(LETTERS[Math.floor(Math.random() * difficultyLevel)]);
     }
@@ -64,7 +64,7 @@ export const getCorrectLetterArray = ({
     lettersArray: string[];
     difficultyLevel: number;
 }): Array<string | undefined> => {
-    let result: Array<string | undefined> = [];
+    const result: Array<string | undefined> = [];
     for (let i = 0; i < lettersArray.length; i++) {
         if (lettersArray[i - difficultyLevel] === lettersArray[i])
             result.push(lettersArray[i]);
@@ -91,7 +91,11 @@ export const handleLetters = ({
 }: {
     difficultyLevel: number;
     gameDuration: number;
-}) => {
+}): {
+    lettersArray: string[];
+    correctLettersArray: (string | undefined)[];
+    correctLetterCount: number;
+} => {
     const lettersArray: string[] = getValidatedGeneratedLetters({
         difficultyLevel,
         gameDuration,
@@ -101,7 +105,6 @@ export const handleLetters = ({
         lettersArray,
         difficultyLevel,
     });
-    console.log('correctLetterArray', correctLettersArray);
 
     const correctLetterCount: number =
         countCorrectLetterAnswers(correctLettersArray);

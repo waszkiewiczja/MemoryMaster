@@ -7,7 +7,7 @@ import { Title } from './title/Title';
 
 export const Main: React.FC = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const displayModal = (status: boolean) => {
+    const displayModal = (status: boolean): void => {
         setIsVisible(status);
     };
 

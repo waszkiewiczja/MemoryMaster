@@ -15,7 +15,7 @@ export const ResultButton: React.FC<ResultButtonPropsType> = ({
 }) => {
     const [show, setShow] = useState(true);
 
-    const onClickHandler = () => {
+    const onClickHandler = (): void => {
         setShow((prevState) => !prevState);
     };
 

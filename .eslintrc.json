@@ -1,3 +1,64 @@
 {
-  "extends": "next/core-web-vitals"
+    "extends": [
+        "next",
+        "next/core-web-vitals",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "plugin:jsx-a11y/recommended"
+    ],
+    "plugins": ["@typescript-eslint", "jsx-a11y"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2021,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "es2021": true
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "rules": {
+        "consistent-return": "error",
+        "no-console": "warn",
+        "no-unused-vars": ["off"],
+        "prefer-const": "error",
+        "react/jsx-props-no-spreading": "off",
+        "react/no-array-index-key": "warn",
+        "react/prop-types": "off",
+
+        "@typescript-eslint/no-confusing-void-expression": "off",
+
+        "@typescript-eslint/no-unused-vars": ["warn"],
+
+        "@typescript-eslint/triple-slash-reference": "off",
+
+        "@typescript-eslint/unbound-method": "off",
+
+        "@typescript-eslint/consistent-type-definitions": "off",
+
+        "@typescript-eslint/explicit-function-return-type": "warn",
+
+        "@typescript-eslint/strict-boolean-expressions": "off",
+
+        "@typescript-eslint/prefer-nullish-coalescing": "off",
+
+        "react/react-in-jsx-scope": "off",
+        "jsx-a11y/anchor-is-valid": "off",
+        "jsx-a11y/label-has-associated-control": [
+            "error",
+            {
+                "labelComponents": ["label"],
+                "labelAttributes": ["htmlFor"],
+                "controlComponents": ["input"]
+            }
+        ]
+    }
 }

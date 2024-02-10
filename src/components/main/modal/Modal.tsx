@@ -8,8 +8,6 @@ type ModalPropsType = {
     displayModal: (status: boolean) => void;
 };
 
-const paragraph = 'mb-10 text-gray-100';
-
 export const Modal: React.FC<ModalPropsType> = ({
     isVisible,
     displayModal,
@@ -21,12 +19,12 @@ export const Modal: React.FC<ModalPropsType> = ({
             }`}
         >
             <div className="relative bg-[#212121] max-w-2xl max-h-[500px] flex justify-space-around items-center flex-col opacity-100 text-gray-300 p-12 text-justify overflow-y-auto border border-wheat caret-transparent ">
-                <span
+                <button
                     className="absolute top-4 right-4 font-bold cursor-pointer text-3xl"
                     onClick={() => displayModal(false)}
                 >
                     X
-                </span>
+                </button>
 
                 <MemoryMaster />
                 <GameRules />

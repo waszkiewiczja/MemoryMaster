@@ -3,11 +3,11 @@ type TitlePropsType = {
 };
 export const Title: React.FC<TitlePropsType> = ({ displayModal }) => {
     return (
-        <p
+        <button
             className="text-4xl font-bold text-gray-500 cursor-pointer"
             onClick={() => displayModal(true)}
         >
             Memory Master
-        </p>
+        </button>
     );
 };

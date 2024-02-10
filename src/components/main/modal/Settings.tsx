@@ -1,18 +1,15 @@
-import { RootState } from '@/store';
 import { setDifficultyLevel } from '@/store/slicer/AppSlice';
-import { ChangeEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { ChangeEvent, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 export const Settings: React.FC = () => {
     const dispatch = useDispatch();
 
-    const difficultyLevel = String(
-        useSelector((state: RootState) => state.appSlice.difficultyLevel)
-    );
+    const [numberValue, setNumberValue] = useState<number>(2);
 
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const value = event.target.value;
-
+        setNumberValue(Number(value));
         dispatch(setDifficultyLevel(Number(value)));
     };
     return (
@@ -27,7 +24,7 @@ export const Settings: React.FC = () => {
                 <input
                     type="number"
                     id="numberInput"
-                    value={difficultyLevel}
+                    value={numberValue}
                     onChange={handleInputChange}
                     min={2}
                     max={8}

@@ -39,7 +39,8 @@ export const appSlice = createSlice({
         },
         setDifficultyLevel: (state, actions: PayloadAction<number>) => {
             if (actions.payload >= 2 && actions.payload <= 8)
-                state.difficultyLevel = actions.payload;
+                state.gameDuration = 3 + actions.payload * 4;
+            state.difficultyLevel = actions.payload;
         },
     },
 });

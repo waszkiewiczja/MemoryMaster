@@ -6,20 +6,20 @@ import { Providers } from './provider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'MemoryMaster - Brain Training App',
-  description: 'Train your Brain and Memory with simple game.',
+    title: 'MemoryMaster - Brain Training App',
+    description: 'Train your Brain and Memory with simple game.',
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Providers>{children} </Providers>
-      </body>
-    </html>
-  );
+    children: React.ReactNode;
+}>): React.ReactElement {
+    return (
+        <html lang="en">
+            <body className={inter.className}>
+                <Providers>{children} </Providers>
+            </body>
+        </html>
+    );
 }

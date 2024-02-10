@@ -20,7 +20,7 @@ const PositionButtonComponent: React.FC = () => {
         useStore<RootState>().getState().gameSlice.userPositionsAnswers;
 
     let clicked = false;
-    const onClickHandler = () => {
+    const onClickHandler = (): void => {
         if (activePosition >= 0)
             if (!clicked) {
                 clicked = true;

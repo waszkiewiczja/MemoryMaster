@@ -1,7 +1,7 @@
 import { getValidatedGeneratedResults } from './indexes';
 
 export const generateRandomArray = (gameDuration: number): number[] => {
-    let result: number[] = [];
+    const result: number[] = [];
 
     for (let i = 0; i < gameDuration; i++) {
         result.push(Math.floor(Math.random() * 9));
@@ -18,7 +18,7 @@ export const getSquaresArray = ({
     difficultyLevel: number;
     gameDuration: number;
 }): number[] => {
-    let result: number[] = generateRandomArray(gameDuration);
+    const result: number[] = generateRandomArray(gameDuration);
 
     resultIndexes.map((index) => {
         if (resultIndexes[index] === resultIndexes[index + difficultyLevel]) {
@@ -37,7 +37,7 @@ export const getCorrectPositionArray = ({
     squaresArray: number[];
     difficultyLevel: number;
 }): Array<number | undefined> => {
-    let result: Array<number | undefined> = [];
+    const result: Array<number | undefined> = [];
     for (let i = 0; i < squaresArray.length; i++) {
         if (squaresArray[i - difficultyLevel] === squaresArray[i])
             result.push(squaresArray[i]);
@@ -64,7 +64,11 @@ export const handlePositions = ({
 }: {
     difficultyLevel: number;
     gameDuration: number;
-}) => {
+}): {
+    squaresArray: number[];
+    correctPositionsArray: (number | undefined)[];
+    correctPositionCount: number;
+} => {
     const resultIndexes: number[] = getValidatedGeneratedResults({
         difficultyLevel,
         gameDuration,
@@ -81,7 +85,6 @@ export const handlePositions = ({
             squaresArray,
             difficultyLevel,
         });
-    console.log('correctPositionAnswers', correctPositionsArray);
 
     const correctPositionCount: number = countCorrectPositionAnswers(
         correctPositionsArray
