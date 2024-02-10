@@ -8,7 +8,7 @@ import {
     countMatchingStrings,
 } from '@/gameLogic/results';
 import { ResultButton } from './ResultButton';
-import { setDifficultyLevel } from '@/store/slicer/AppSlice';
+import { updateDifficultyLevel } from '@/store/slicer/AppSlice';
 
 export const ResultButtonWrapper: React.FC = () => {
     const dispatch = useDispatch();
@@ -37,12 +37,12 @@ export const ResultButtonWrapper: React.FC = () => {
 
     useEffect(() => {
         if (userResult === 0 || userResult === 1) {
-            dispatch(setDifficultyLevel(-1));
+            dispatch(updateDifficultyLevel(-1));
         } else if (
             userResult === totalCorrectAnswersCount - 1 ||
             userResult === totalCorrectAnswersCount
         ) {
-            dispatch(setDifficultyLevel(1));
+            dispatch(updateDifficultyLevel(1));
         }
     });
 

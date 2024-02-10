@@ -25,7 +25,7 @@ export const appSlice = createSlice({
         setFinishedStatus: (state) => {
             state.gameStatus = GameStatus.FINISHED;
         },
-        setDifficultyLevel: (state, actions: PayloadAction<number>) => {
+        updateDifficultyLevel: (state, actions: PayloadAction<number>) => {
             if (actions.payload === -1 && state.difficultyLevel > 2) {
                 state.gameDuration =
                     3 + (state.difficultyLevel + actions.payload) * 4;
@@ -37,9 +37,17 @@ export const appSlice = createSlice({
                 state.difficultyLevel = state.difficultyLevel + actions.payload;
             }
         },
+        setDifficultyLevel: (state, actions: PayloadAction<number>) => {
+            if (actions.payload >= 2 && actions.payload <= 8)
+                state.difficultyLevel = actions.payload;
+        },
     },
 });
 
-export const { setActiveStatus, setFinishedStatus, setDifficultyLevel } =
-    appSlice.actions;
+export const {
+    setActiveStatus,
+    setFinishedStatus,
+    updateDifficultyLevel,
+    setDifficultyLevel,
+} = appSlice.actions;
 export default appSlice.reducer;

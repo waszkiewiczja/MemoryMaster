@@ -5,8 +5,11 @@ import { StartButton } from './start/StartButton';
 import { PositionButton } from './position/PositionButton';
 import { LetterButton } from './letter/LetterButton';
 import { ResultButtonWrapper } from './result/ResultButtonWrapper';
+import { SettingsButton } from './settings/SettingsButton';
 
-export const Buttons: React.FC = () => {
+type ButtonsPropsType = { displayModal: (status: boolean) => void };
+
+export const Buttons: React.FC<ButtonsPropsType> = ({ displayModal }) => {
     const gameStatus = useSelector(
         (state: RootState) => state.appSlice.gameStatus
     );
@@ -16,6 +19,9 @@ export const Buttons: React.FC = () => {
             {gameStatus === GameStatus.TO_START ||
             gameStatus === GameStatus.FINISHED ? (
                 <StartButton />
+            ) : null}
+            {gameStatus === GameStatus.TO_START ? (
+                <SettingsButton displayModal={displayModal} />
             ) : null}
 
             {gameStatus === GameStatus.ACTIVE ? <PositionButton /> : null}
