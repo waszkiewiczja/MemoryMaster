@@ -9,8 +9,11 @@ export const Settings: React.FC = () => {
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
         const value = event.target.value;
-        setNumberValue(Number(value));
-        dispatch(setDifficultyLevel(Number(value)));
+        const parsedValue = parseInt(value, 10);
+        if (!isNaN(parsedValue) && parsedValue >= 2 && parsedValue <= 8) {
+            setNumberValue(parsedValue);
+            dispatch(setDifficultyLevel(parsedValue));
+        }
     };
     return (
         <>
