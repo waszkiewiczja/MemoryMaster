@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ButtonName } from '@/types/button';
 import { handleLetters } from '@/gameLogic/letters';
@@ -18,9 +19,10 @@ import {
 import { RootState } from '@/store';
 
 const buttonClass =
-    'bg-[#393D41] text-slate-300 caret-transparent border border-solid border-orange-200 p-4 m-4 active:bg-yellow-900';
+    'bg-[#393D41] text-slate-300 caret-transparent border border-solid border-green-500 p-4 m-4 active:bg-yellow-900 disabled:border-red-500';
 
 export const StartButton: React.FC = () => {
+    const [isButtonDisabled, setButtonDisabled] = useState(true);
     const dispatch = useDispatch();
 
     const difficultyLevel = useSelector(
@@ -77,8 +79,20 @@ export const StartButton: React.FC = () => {
         startDisplaying({ squaresArray, lettersArray });
     };
 
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setButtonDisabled(false);
+        }, 2000);
+
+        return () => clearTimeout(timeoutId);
+    }, []);
+
     return (
-        <button className={buttonClass} onClick={onClickHandler}>
+        <button
+            className={buttonClass}
+            onClick={onClickHandler}
+            disabled={isButtonDisabled}
+        >
             {ButtonName.START} lvl: {difficultyLevel}
         </button>
     );
